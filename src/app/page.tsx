@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
+const getPixels = require("get-pixels")
 
 type CardProp = {
   deck: string,
@@ -21,8 +22,10 @@ export default function Home() {
   ]
 
   useEffect(() => {
-    // setCards([db[1], db[2], db[3], db[4], db[5], db[1], db[2], db[3], db[4]]) // 9 items / 3 collumns = 3 rows
+    //Init grid - V1
+    // setCards([db[1], db[2], db[3], db[4], db[5], db[1], db[2], db[3], db[4]]) // 9 items total, grid with 3 collumns, rows = 3 
 
+    //Init grid - V2
     for (let i = 1; i < 26; i++) {
       setTimeout(() => {
         // console.log(cards.length % 5 + 1) //1, 1, 1, 1, 1, 1, 1, ... x N
@@ -33,7 +36,29 @@ export default function Home() {
         })
       }, i * 500)
     }
+
+    (async () => {
+      await getImage("https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80MmJlZjI1ODU5ZWY1OTIyODUzYThmMmE3YzdhNGNlZj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.JTCwo1QFSJOROohvVLUAdrY_1A3z0vvpZJUB6gP-qh0")
+    })()
   }, [])
+
+  //For a 16x16 image (for ex.), returns a 40.000 1D-array of pixels data (16 * 16 * 4 channels) in raster order.
+  //[1, 124, 48, 255, 1, 124, 48, 255, ...]
+  // R,  G,  B,  a,   R,  G,  B,  a, ...
+  //|<-  Pixel #1  ->|<- Pixel #2 ->|
+  function getImage(url: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      getPixels(url, function(err: any, pixels: any) {
+        if (err) {
+          console.log("Bad image path")
+          reject(err)
+        } else {
+          console.log("Got pixels:", pixels.shape.slice(), pixels.data)
+          resolve({shape: pixels.shape.slice(), pixels: pixels.data})
+        }
+      })
+    })
+  }
 
   return (
     <div className="flex flex-col items-center justify-center">
