@@ -12,8 +12,10 @@ export default function Home() {
 
   const [ cards, setCards ] = useState<CardProp[]>([])
 
+  const n = 25 //number of cards in the entire grid
+
+  const bg = {deck: "SV3PT5", name: "Eevee", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_133.png"}
   const db = [
-    {deck: "SV3PT5", name: "Eevee", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_133.png"},
     {deck: "SV3PT5", name: "Jolteon", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_135.png"},
     {deck: "SM12", name: "Flareon", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SM12/SM12_EN_25.png"},
     {deck: "SWSH4", name: "Vaporeon", url: "https://assets.pokemon.com/static-assets/content-assets/cms2-pt-br/img/cards/web/SWSH4/SWSH4_PT-BR_30.png"},
@@ -26,26 +28,26 @@ export default function Home() {
     // setCards([db[1], db[2], db[3], db[4], db[5], db[1], db[2], db[3], db[4]]) // 9 items total, grid with 3 collumns, rows = 3 
 
     //Init grid - V2
-    for (let i = 1; i < 26; i++) {
+    for (let i = 0; i < n; i++) {
       setTimeout(() => {
-        // console.log(cards.length % 5 + 1) //1, 1, 1, 1, 1, 1, 1, ... x N
-        // setCards([...cards, db[cards.length % 5 + 1]])
+        // console.log(cards.length % 5) //0, 0, 0, 0, 0, 0, 0, ... x infinite
+        // setCards([...cards, db[cards.length % 5]])
         setCards(prevCards => {
-          console.log(prevCards.length % 5 + 1) //1, 2, 3, 4, 5, 1, 2, ...
-          return [...prevCards, db[prevCards.length % 5 + 1]];
+          console.log(prevCards.length % 5) //0, 1, 2, 3, 4, 0, 1, 2, ...
+          return [...prevCards, db[prevCards.length % 5]];
         })
-      }, i * 500)
+      }, i * 250)
     }
 
     (async () => {
       const data = await getImage("https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80MmJlZjI1ODU5ZWY1OTIyODUzYThmMmE3YzdhNGNlZj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.JTCwo1QFSJOROohvVLUAdrY_1A3z0vvpZJUB6gP-qh0")
 
-      const n = 5 //400 images total? SqRt(400) = 20; and width * height = total
-      const sectionWidth = data.shape[0]/n
-      const sectionHeight = data.shape[0]/n
+      const sqrt = Math.sqrt(n) //400 images total? SqRt(400) = 20; and width * height = total
+      const sectionWidth = data.shape[0]/sqrt
+      const sectionHeight = data.shape[1]/sqrt
 
-      for (let j = 0; j < n; j++) {
-        for (let i = 0; i < n; i++) {
+      for (let j = 0; j < sqrt; j++) {
+        for (let i = 0; i < sqrt; i++) {
           console.log(`x=${i*sectionWidth}, y=${j*sectionHeight}, avgColor=${getSectionAvgColor(data.pixels, data.shape[0], i*sectionWidth, j*sectionHeight, sectionWidth, sectionHeight)}`)
         }
       }
