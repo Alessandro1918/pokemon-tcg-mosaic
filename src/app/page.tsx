@@ -5,6 +5,7 @@ const getPixels = require("get-pixels")
 type CardProp = {
   deck: string,
   name: string,
+  avgColor: number[],
   url: string
 }
 
@@ -14,13 +15,14 @@ export default function Home() {
 
   const n = 25 //number of cards in the entire grid
 
-  const bg = {deck: "SV3PT5", name: "Eevee", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_133.png"}
+  // const smImg = "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80MmJlZjI1ODU5ZWY1OTIyODUzYThmMmE3YzdhNGNlZj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.JTCwo1QFSJOROohvVLUAdrY_1A3z0vvpZJUB6gP-qh0"
+  // const bg = {deck: "SV3PT5", name: "Eevee", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_133.png"}
   const db = [
-    {deck: "SV3PT5", name: "Jolteon", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_135.png"},
-    {deck: "SM12", name: "Flareon", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SM12/SM12_EN_25.png"},
-    {deck: "SWSH4", name: "Vaporeon", url: "https://assets.pokemon.com/static-assets/content-assets/cms2-pt-br/img/cards/web/SWSH4/SWSH4_PT-BR_30.png"},
-    {deck: "SM8", name: "Umbreon", url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SM8/SM8_EN_120.png"},
-    {deck: "SV03", name: "Espeon", url: "https://assets.pokemon.com/static-assets/content-assets/cms2-pt-br/img/cards/web/SV03/SV03_PT-BR_86.png"}
+    {deck: "SV3PT5", name: "Jolteon",  avgColor: [217,202,124], url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_135.png"},
+    {deck: "SM12",   name: "Flareon",  avgColor: [240,112,58],  url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SM12/SM12_EN_25.png"},
+    {deck: "SWSH4",  name: "Vaporeon", avgColor: [108,188,211], url: "https://assets.pokemon.com/static-assets/content-assets/cms2-pt-br/img/cards/web/SWSH4/SWSH4_PT-BR_30.png"},
+    {deck: "SM8",    name: "Umbreon",  avgColor: [53,75,90],    url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SM8/SM8_EN_120.png"},
+    {deck: "SV03",   name: "Espeon",   avgColor: [198,161,190], url: "https://assets.pokemon.com/static-assets/content-assets/cms2-pt-br/img/cards/web/SV03/SV03_PT-BR_86.png"}
   ]
 
   useEffect(() => {
@@ -33,22 +35,22 @@ export default function Home() {
         // console.log(cards.length % 5) //0, 0, 0, 0, 0, 0, 0, ... x infinite
         // setCards([...cards, db[cards.length % 5]])
         setCards(prevCards => {
-          console.log(prevCards.length % 5) //0, 1, 2, 3, 4, 0, 1, 2, ...
+          // console.log(prevCards.length % 5) //0, 1, 2, 3, 4, 0, 1, 2, ...
           return [...prevCards, db[prevCards.length % 5]];
         })
       }, i * 250)
     }
 
     (async () => {
-      const data = await getImage("https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80MmJlZjI1ODU5ZWY1OTIyODUzYThmMmE3YzdhNGNlZj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.JTCwo1QFSJOROohvVLUAdrY_1A3z0vvpZJUB6gP-qh0")
+      const data = await getImage("https://corsproxy.io/" + db[0].url)
 
+      //Split the image in small image sections, get the avgColor of each one:
       const sqrt = Math.sqrt(n) //400 images total? SqRt(400) = 20; and width * height = total
       const sectionWidth = data.shape[0]/sqrt
       const sectionHeight = data.shape[1]/sqrt
-
       for (let j = 0; j < sqrt; j++) {
         for (let i = 0; i < sqrt; i++) {
-          console.log(`x=${i*sectionWidth}, y=${j*sectionHeight}, avgColor=${getSectionAvgColor(data.pixels, data.shape[0], i*sectionWidth, j*sectionHeight, sectionWidth, sectionHeight)}`)
+          console.log(`x=${Math.trunc(i*sectionWidth)}, y=${Math.trunc(j*sectionHeight)}, avgColor=${getSectionAvgColor(data.pixels, data.shape[0], Math.trunc(i*sectionWidth), Math.trunc(j*sectionHeight), Math.trunc(sectionWidth), Math.trunc(sectionHeight))}`)
         }
       }
     })()
