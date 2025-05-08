@@ -38,11 +38,24 @@ export default function Home() {
     }
 
     (async () => {
-      await getImage("https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80MmJlZjI1ODU5ZWY1OTIyODUzYThmMmE3YzdhNGNlZj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.JTCwo1QFSJOROohvVLUAdrY_1A3z0vvpZJUB6gP-qh0")
+      const data = await getImage("https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80MmJlZjI1ODU5ZWY1OTIyODUzYThmMmE3YzdhNGNlZj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.JTCwo1QFSJOROohvVLUAdrY_1A3z0vvpZJUB6gP-qh0")
+
+      const n = 5 //400 images total? SqRt(400) = 20; and width * height = total
+      const sectionWidth = data.shape[0]/n
+      const sectionHeight = data.shape[0]/n
+
+      for (let j = 0; j < n; j++) {
+        for (let i = 0; i < n; i++) {
+          console.log(`x=${i*sectionWidth}, y=${j*sectionHeight}, avgColor=${getSectionAvgColor(data.pixels, data.shape[0], i*sectionWidth, j*sectionHeight, sectionWidth, sectionHeight)}`)
+        }
+      }
     })()
   }, [])
 
   //For a 16x16 image (for ex.), returns a 40.000 1D-array of pixels data (16 * 16 * 4 channels) in raster order.
+  //Shape:
+  //[16, 16, 4]: width, height, channels
+  //Pixels:
   //[1, 124, 48, 255, 1, 124, 48, 255, ...]
   // R,  G,  B,  a,   R,  G,  B,  a, ...
   //|<-  Pixel #1  ->|<- Pixel #2 ->|
@@ -58,6 +71,41 @@ export default function Home() {
         }
       })
     })
+  }
+
+  function sort(arr: number[]) {
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = 0; j < (arr.length - i - 1); j++) {
+        if (arr[j] > arr[j + 1]) {
+          var temp = arr[j]
+          arr[j] = arr[j + 1]
+          arr[j + 1] = temp
+        }
+      }
+    }
+  }
+
+  //For a split section of an entire image, get the avarage color of that section.
+  //  ----> "x" axys
+  //  |
+  //  V     "y" axys
+  function getSectionAvgColor(pixels: number[], imageWidth: number, x: number, y: number, width: number, height: number) {
+    const avg = [0, 0, 0] //R, G, B
+    //V1 - Medium value: [..., 27, 28, 29, ...]: array of values of a single channel in asc order. Get the middle element (in the ex., "28")
+    for (let channel = 0; channel < 3; channel++) {
+      const section:number[] = []
+      for (let j = y; j < y+height; j++) {
+        for (let i = x; i < x+width; i++) {
+          // console.log("i:", i, "j:", j, "index:", ((i*4) + j*imageWidth*4) + channel, "value:", pixels[((i*4) + j*imageWidth) + channel])
+          section.push(pixels[((i*4) + j*imageWidth*4) + channel])
+        }
+      }
+      sort(section)
+      // console.log(section)
+      avg[channel] = section[section.length / 2]
+    }
+    // console.log(avg)
+    return avg
   }
 
   return (
