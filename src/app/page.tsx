@@ -13,7 +13,7 @@ export default function Home() {
 
   const [ cards, setCards ] = useState<CardProp[]>([])
 
-  const n = 11*11 //number of cards in the entire grid
+  const n = 50*50 //number of cards in the entire grid
 
   // const smImg = "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80MmJlZjI1ODU5ZWY1OTIyODUzYThmMmE3YzdhNGNlZj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.JTCwo1QFSJOROohvVLUAdrY_1A3z0vvpZJUB6gP-qh0"
   // const eevee = "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_133.png"
@@ -44,7 +44,10 @@ export default function Home() {
     // }
 
     (async () => {
-      const baseImageData = await getImage("https://corsproxy.io/" + "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg")
+      //Dev:
+      // const baseImageData = await getImage("https://corsproxy.io/" + "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg")
+      //Prod:
+      const baseImageData = await getImage("https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg")
 
       //Split the base image in small image sections
       const sqrt = Math.sqrt(n) //400 images total? SqRt(400) = 20; and width * height = total
@@ -156,10 +159,13 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1>Hello, world!</h1>
+      {/* <h1>Hello, world!</h1> */}
+      {/* Mobile zoom/scroll works with any width, desktops need this sm:w-max.
+      Issue: at 200% zoom on desktop, the breakpoint changes to mobile, and I lose the zoom/scroll feat. */}
       <div className={`
-        grid grid-cols-11
-        zgap-[4px] bg-cover bg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]
+        sm:w-max
+        grid grid-cols-50 
+        zbg-cover zbg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]
       `}>
         {
           cards.map((card, i) => {
@@ -167,7 +173,7 @@ export default function Home() {
               <img 
                 key={i}
                 src={card.url}
-                className="w-10 aspect-auto opacity-70"
+                className="w-5 aspect-auto opacity-100"
                 alt={`${card.deck} - ${card.name}`}
                 title={`${card.deck} - ${card.name}`}
               />
