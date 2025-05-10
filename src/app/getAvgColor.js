@@ -8,15 +8,44 @@
 //  V       "y" axys
 function getAvgColor(pixels, imageWidth, x, y, width, height) {
 
-  function sort(arr) {
-    for (var i = 0; i < arr.length; i++) {
-      for (var j = 0; j < (arr.length - i - 1); j++) {
-        if (arr[j] > arr[j + 1]) {
-          var temp = arr[j]
-          arr[j] = arr[j + 1]
-          arr[j + 1] = temp
+  // function bubbleSort(arr) {
+  //   function swap(arr, i, j) {
+  //     let temp = arr[i]
+  //     arr[i] = arr[j]
+  //     arr[j] = temp
+  //   }
+  //   for (var i = 0; i < arr.length; i++) {
+  //     for (var j = 0; j < (arr.length - i - 1); j++) {
+  //       if (arr[j] > arr[j + 1]) {
+  //         swap(arr, j, j+1)
+  //       }
+  //     }
+  //   }
+  // }
+
+  function quickSort(arr) { //Iteractive
+
+    function partition(arr, low, high) {
+      const pivot = arr[high]
+      let i = low
+      for (let j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+          [arr[i], arr[j]] = [arr[j], arr[i]]
+          i++
         }
       }
+      [arr[i], arr[high]] = [arr[high], arr[i]]
+      return i
+    }
+
+    if (arr.length <= 1) return arr
+    const stack = [{ start: 0, end: arr.length - 1 }]
+    while (stack.length > 0) {
+      const { start, end } = stack.pop()
+      if (start >= end) continue
+      const pivotIndex = partition(arr, start, end)
+      stack.push({ start, end: pivotIndex - 1 })
+      stack.push({ start: pivotIndex + 1, end })
     }
   }
 
@@ -30,7 +59,9 @@ function getAvgColor(pixels, imageWidth, x, y, width, height) {
         section.push(pixels[((i*4) + j*imageWidth*4) + channel])
       }
     }
-    sort(section)
+    // section.sort()
+    // bubbleSort(section)
+    quickSort(section)
     // console.log(section)
     avg[channel] = section[section.length / 2]
   }

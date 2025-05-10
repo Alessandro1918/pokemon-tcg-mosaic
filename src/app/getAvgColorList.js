@@ -22,6 +22,7 @@ const promises = jsonData.cards.map(card => {
       imageData.shape[0],
       imageData.shape[1]
     )
+    console.log(`${card.name}: ${avgColor}`)
     return {...card, avgColor: avgColor}
   })
 })
