@@ -1,0 +1,1512 @@
+[
+  {
+    "id": "1",
+    "name": "Bulbasaur",
+    "url": "https://images.pokemontcg.io/sv3pt5/1.png",
+    "avgColor": [
+      185,
+      211,
+      100
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Ivysaur",
+    "url": "https://images.pokemontcg.io/sv3pt5/2.png",
+    "avgColor": [
+      184,
+      205,
+      97
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Venusaur",
+    "url": "https://images.pokemontcg.io/sv3pt5/3.png",
+    "avgColor": [
+      142,
+      166,
+      91
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Charmander",
+    "url": "https://images.pokemontcg.io/sv3pt5/4.png",
+    "avgColor": [
+      223,
+      163,
+      115
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Charmeleon",
+    "url": "https://images.pokemontcg.io/sv3pt5/5.png",
+    "avgColor": [
+      237,
+      157,
+      106
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Charizard",
+    "url": "https://images.pokemontcg.io/sv3pt5/6.png",
+    "avgColor": [
+      220,
+      147,
+      96
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Squirtle",
+    "url": "https://images.pokemontcg.io/sv3pt5/7.png",
+    "avgColor": [
+      136,
+      187,
+      214
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Wartortle",
+    "url": "https://images.pokemontcg.io/sv3pt5/8.png",
+    "avgColor": [
+      139,
+      180,
+      208
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Blastoise",
+    "url": "https://images.pokemontcg.io/sv3pt5/9.png",
+    "avgColor": [
+      110,
+      165,
+      192
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Caterpie",
+    "url": "https://images.pokemontcg.io/sv3pt5/10.png",
+    "avgColor": [
+      184,
+      208,
+      103
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Metapod",
+    "url": "https://images.pokemontcg.io/sv3pt5/11.png",
+    "avgColor": [
+      182,
+      202,
+      96
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Butterfree",
+    "url": "https://images.pokemontcg.io/sv3pt5/12.png",
+    "avgColor": [
+      169,
+      195,
+      99
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Weedle",
+    "url": "https://images.pokemontcg.io/sv3pt5/13.png",
+    "avgColor": [
+      183,
+      200,
+      96
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Kakuna",
+    "url": "https://images.pokemontcg.io/sv3pt5/14.png",
+    "avgColor": [
+      189,
+      200,
+      102
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Beedrill",
+    "url": "https://images.pokemontcg.io/sv3pt5/15.png",
+    "avgColor": [
+      181,
+      204,
+      107
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Pidgey",
+    "url": "https://images.pokemontcg.io/sv3pt5/16.png",
+    "avgColor": [
+      222,
+      219,
+      209
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Pidgeotto",
+    "url": "https://images.pokemontcg.io/sv3pt5/17.png",
+    "avgColor": [
+      213,
+      215,
+      219
+    ]
+  },
+  {
+    "id": "18",
+    "name": "Pidgeot",
+    "url": "https://images.pokemontcg.io/sv3pt5/18.png",
+    "avgColor": [
+      218,
+      201,
+      203
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Rattata",
+    "url": "https://images.pokemontcg.io/sv3pt5/19.png",
+    "avgColor": [
+      206,
+      211,
+      204
+    ]
+  },
+  {
+    "id": "20",
+    "name": "Raticate",
+    "url": "https://images.pokemontcg.io/sv3pt5/20.png",
+    "avgColor": [
+      207,
+      204,
+      197
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Spearow",
+    "url": "https://images.pokemontcg.io/sv3pt5/21.png",
+    "avgColor": [
+      210,
+      213,
+      205
+    ]
+  },
+  {
+    "id": "22",
+    "name": "Fearow",
+    "url": "https://images.pokemontcg.io/sv3pt5/22.png",
+    "avgColor": [
+      214,
+      204,
+      197
+    ]
+  },
+  {
+    "id": "23",
+    "name": "Ekans",
+    "url": "https://images.pokemontcg.io/sv3pt5/23.png",
+    "avgColor": [
+      48,
+      113,
+      115
+    ]
+  },
+  {
+    "id": "24",
+    "name": "Arbok",
+    "url": "https://images.pokemontcg.io/sv3pt5/24.png",
+    "avgColor": [
+      81,
+      113,
+      124
+    ]
+  },
+  {
+    "id": "25",
+    "name": "Pikachu",
+    "url": "https://images.pokemontcg.io/sv3pt5/25.png",
+    "avgColor": [
+      235,
+      209,
+      114
+    ]
+  },
+  {
+    "id": "26",
+    "name": "Raichu",
+    "url": "https://images.pokemontcg.io/sv3pt5/26.png",
+    "avgColor": [
+      230,
+      201,
+      127
+    ]
+  },
+  {
+    "id": "27",
+    "name": "Sandshrew",
+    "url": "https://images.pokemontcg.io/sv3pt5/27.png",
+    "avgColor": [
+      206,
+      163,
+      77
+    ]
+  },
+  {
+    "id": "28",
+    "name": "Sandslash",
+    "url": "https://images.pokemontcg.io/sv3pt5/28.png",
+    "avgColor": [
+      205,
+      158,
+      78
+    ]
+  },
+  {
+    "id": "29",
+    "name": "Nidoran♀",
+    "url": "https://images.pokemontcg.io/sv3pt5/29.png",
+    "avgColor": [
+      53,
+      100,
+      109
+    ]
+  },
+  {
+    "id": "30",
+    "name": "Nidorina",
+    "url": "https://images.pokemontcg.io/sv3pt5/30.png",
+    "avgColor": [
+      52,
+      105,
+      124
+    ]
+  },
+  {
+    "id": "31",
+    "name": "Nidoqueen",
+    "url": "https://images.pokemontcg.io/sv3pt5/31.png",
+    "avgColor": [
+      64,
+      111,
+      123
+    ]
+  },
+  {
+    "id": "32",
+    "name": "Nidoran♂",
+    "url": "https://images.pokemontcg.io/sv3pt5/32.png",
+    "avgColor": [
+      41,
+      98,
+      104
+    ]
+  },
+  {
+    "id": "33",
+    "name": "Nidorino",
+    "url": "https://images.pokemontcg.io/sv3pt5/33.png",
+    "avgColor": [
+      51,
+      95,
+      126
+    ]
+  },
+  {
+    "id": "34",
+    "name": "Nidoking",
+    "url": "https://images.pokemontcg.io/sv3pt5/34.png",
+    "avgColor": [
+      98,
+      100,
+      114
+    ]
+  },
+  {
+    "id": "35",
+    "name": "Clefairy",
+    "url": "https://images.pokemontcg.io/sv3pt5/35.png",
+    "avgColor": [
+      203,
+      166,
+      193
+    ]
+  },
+  {
+    "id": "36",
+    "name": "Clefable",
+    "url": "https://images.pokemontcg.io/sv3pt5/36.png",
+    "avgColor": [
+      199,
+      159,
+      188
+    ]
+  },
+  {
+    "id": "37",
+    "name": "Vulpix",
+    "url": "https://images.pokemontcg.io/sv3pt5/37.png",
+    "avgColor": [
+      214,
+      155,
+      109
+    ]
+  },
+  {
+    "id": "38",
+    "name": "Ninetales",
+    "url": "https://images.pokemontcg.io/sv3pt5/38.png",
+    "avgColor": [
+      185,
+      137,
+      107
+    ]
+  },
+  {
+    "id": "39",
+    "name": "Jigglypuff",
+    "url": "https://images.pokemontcg.io/sv3pt5/39.png",
+    "avgColor": [
+      220,
+      215,
+      209
+    ]
+  },
+  {
+    "id": "40",
+    "name": "Wigglytuff",
+    "url": "https://images.pokemontcg.io/sv3pt5/40.png",
+    "avgColor": [
+      190,
+      184,
+      185
+    ]
+  },
+  {
+    "id": "41",
+    "name": "Zubat",
+    "url": "https://images.pokemontcg.io/sv3pt5/41.png",
+    "avgColor": [
+      20,
+      85,
+      100
+    ]
+  },
+  {
+    "id": "42",
+    "name": "Golbat",
+    "url": "https://images.pokemontcg.io/sv3pt5/42.png",
+    "avgColor": [
+      46,
+      93,
+      113
+    ]
+  },
+  {
+    "id": "43",
+    "name": "Oddish",
+    "url": "https://images.pokemontcg.io/sv3pt5/43.png",
+    "avgColor": [
+      191,
+      206,
+      90
+    ]
+  },
+  {
+    "id": "44",
+    "name": "Gloom",
+    "url": "https://images.pokemontcg.io/sv3pt5/44.png",
+    "avgColor": [
+      185,
+      189,
+      93
+    ]
+  },
+  {
+    "id": "45",
+    "name": "Vileplume",
+    "url": "https://images.pokemontcg.io/sv3pt5/45.png",
+    "avgColor": [
+      191,
+      187,
+      94
+    ]
+  },
+  {
+    "id": "46",
+    "name": "Paras",
+    "url": "https://images.pokemontcg.io/sv3pt5/46.png",
+    "avgColor": [
+      181,
+      191,
+      80
+    ]
+  },
+  {
+    "id": "47",
+    "name": "Parasect",
+    "url": "https://images.pokemontcg.io/sv3pt5/47.png",
+    "avgColor": [
+      165,
+      187,
+      81
+    ]
+  },
+  {
+    "id": "48",
+    "name": "Venonat",
+    "url": "https://images.pokemontcg.io/sv3pt5/48.png",
+    "avgColor": [
+      165,
+      191,
+      93
+    ]
+  },
+  {
+    "id": "49",
+    "name": "Venomoth",
+    "url": "https://images.pokemontcg.io/sv3pt5/49.png",
+    "avgColor": [
+      170,
+      187,
+      92
+    ]
+  },
+  {
+    "id": "50",
+    "name": "Diglett",
+    "url": "https://images.pokemontcg.io/sv3pt5/50.png",
+    "avgColor": [
+      206,
+      175,
+      81
+    ]
+  },
+  {
+    "id": "51",
+    "name": "Dugtrio",
+    "url": "https://images.pokemontcg.io/sv3pt5/51.png",
+    "avgColor": [
+      219,
+      184,
+      78
+    ]
+  },
+  {
+    "id": "52",
+    "name": "Meowth",
+    "url": "https://images.pokemontcg.io/sv3pt5/52.png",
+    "avgColor": [
+      216,
+      217,
+      205
+    ]
+  },
+  {
+    "id": "53",
+    "name": "Persian",
+    "url": "https://images.pokemontcg.io/sv3pt5/53.png",
+    "avgColor": [
+      211,
+      206,
+      196
+    ]
+  },
+  {
+    "id": "54",
+    "name": "Psyduck",
+    "url": "https://images.pokemontcg.io/sv3pt5/54.png",
+    "avgColor": [
+      144,
+      197,
+      215
+    ]
+  },
+  {
+    "id": "55",
+    "name": "Golduck",
+    "url": "https://images.pokemontcg.io/sv3pt5/55.png",
+    "avgColor": [
+      131,
+      196,
+      223
+    ]
+  },
+  {
+    "id": "56",
+    "name": "Mankey",
+    "url": "https://images.pokemontcg.io/sv3pt5/56.png",
+    "avgColor": [
+      228,
+      163,
+      74
+    ]
+  },
+  {
+    "id": "57",
+    "name": "Primeape",
+    "url": "https://images.pokemontcg.io/sv3pt5/57.png",
+    "avgColor": [
+      206,
+      176,
+      70
+    ]
+  },
+  {
+    "id": "58",
+    "name": "Growlithe",
+    "url": "https://images.pokemontcg.io/sv3pt5/58.png",
+    "avgColor": [
+      227,
+      163,
+      119
+    ]
+  },
+  {
+    "id": "59",
+    "name": "Arcanine",
+    "url": "https://images.pokemontcg.io/sv3pt5/59.png",
+    "avgColor": [
+      219,
+      154,
+      116
+    ]
+  },
+  {
+    "id": "60",
+    "name": "Poliwag",
+    "url": "https://images.pokemontcg.io/sv3pt5/60.png",
+    "avgColor": [
+      122,
+      183,
+      215
+    ]
+  },
+  {
+    "id": "61",
+    "name": "Poliwhirl",
+    "url": "https://images.pokemontcg.io/sv3pt5/61.png",
+    "avgColor": [
+      125,
+      189,
+      220
+    ]
+  },
+  {
+    "id": "62",
+    "name": "Poliwrath",
+    "url": "https://images.pokemontcg.io/sv3pt5/62.png",
+    "avgColor": [
+      124,
+      187,
+      215
+    ]
+  },
+  {
+    "id": "63",
+    "name": "Abra",
+    "url": "https://images.pokemontcg.io/sv3pt5/63.png",
+    "avgColor": [
+      203,
+      159,
+      187
+    ]
+  },
+  {
+    "id": "64",
+    "name": "Kadabra",
+    "url": "https://images.pokemontcg.io/sv3pt5/64.png",
+    "avgColor": [
+      180,
+      146,
+      175
+    ]
+  },
+  {
+    "id": "65",
+    "name": "Alakazam",
+    "url": "https://images.pokemontcg.io/sv3pt5/65.png",
+    "avgColor": [
+      172,
+      133,
+      148
+    ]
+  },
+  {
+    "id": "66",
+    "name": "Machop",
+    "url": "https://images.pokemontcg.io/sv3pt5/66.png",
+    "avgColor": [
+      218,
+      177,
+      92
+    ]
+  },
+  {
+    "id": "67",
+    "name": "Machoke",
+    "url": "https://images.pokemontcg.io/sv3pt5/67.png",
+    "avgColor": [
+      202,
+      162,
+      86
+    ]
+  },
+  {
+    "id": "68",
+    "name": "Machamp",
+    "url": "https://images.pokemontcg.io/sv3pt5/68.png",
+    "avgColor": [
+      211,
+      178,
+      100
+    ]
+  },
+  {
+    "id": "69",
+    "name": "Bellsprout",
+    "url": "https://images.pokemontcg.io/sv3pt5/69.png",
+    "avgColor": [
+      181,
+      195,
+      82
+    ]
+  },
+  {
+    "id": "70",
+    "name": "Weepinbell",
+    "url": "https://images.pokemontcg.io/sv3pt5/70.png",
+    "avgColor": [
+      181,
+      198,
+      79
+    ]
+  },
+  {
+    "id": "71",
+    "name": "Victreebel",
+    "url": "https://images.pokemontcg.io/sv3pt5/71.png",
+    "avgColor": [
+      182,
+      200,
+      86
+    ]
+  },
+  {
+    "id": "72",
+    "name": "Tentacool",
+    "url": "https://images.pokemontcg.io/sv3pt5/72.png",
+    "avgColor": [
+      145,
+      204,
+      222
+    ]
+  },
+  {
+    "id": "73",
+    "name": "Tentacruel",
+    "url": "https://images.pokemontcg.io/sv3pt5/73.png",
+    "avgColor": [
+      113,
+      171,
+      200
+    ]
+  },
+  {
+    "id": "74",
+    "name": "Geodude",
+    "url": "https://images.pokemontcg.io/sv3pt5/74.png",
+    "avgColor": [
+      198,
+      162,
+      87
+    ]
+  },
+  {
+    "id": "75",
+    "name": "Graveler",
+    "url": "https://images.pokemontcg.io/sv3pt5/75.png",
+    "avgColor": [
+      207,
+      164,
+      73
+    ]
+  },
+  {
+    "id": "76",
+    "name": "Golem",
+    "url": "https://images.pokemontcg.io/sv3pt5/76.png",
+    "avgColor": [
+      190,
+      143,
+      77
+    ]
+  },
+  {
+    "id": "77",
+    "name": "Ponyta",
+    "url": "https://images.pokemontcg.io/sv3pt5/77.png",
+    "avgColor": [
+      224,
+      167,
+      110
+    ]
+  },
+  {
+    "id": "78",
+    "name": "Rapidash",
+    "url": "https://images.pokemontcg.io/sv3pt5/78.png",
+    "avgColor": [
+      234,
+      161,
+      115
+    ]
+  },
+  {
+    "id": "79",
+    "name": "Slowpoke",
+    "url": "https://images.pokemontcg.io/sv3pt5/79.png",
+    "avgColor": [
+      181,
+      157,
+      186
+    ]
+  },
+  {
+    "id": "80",
+    "name": "Slowbro",
+    "url": "https://images.pokemontcg.io/sv3pt5/80.png",
+    "avgColor": [
+      199,
+      159,
+      193
+    ]
+  },
+  {
+    "id": "81",
+    "name": "Magnemite",
+    "url": "https://images.pokemontcg.io/sv3pt5/81.png",
+    "avgColor": [
+      225,
+      199,
+      99
+    ]
+  },
+  {
+    "id": "82",
+    "name": "Magneton",
+    "url": "https://images.pokemontcg.io/sv3pt5/82.png",
+    "avgColor": [
+      215,
+      198,
+      118
+    ]
+  },
+  {
+    "id": "83",
+    "name": "Farfetch’d",
+    "url": "https://images.pokemontcg.io/sv3pt5/83.png",
+    "avgColor": [
+      203,
+      202,
+      196
+    ]
+  },
+  {
+    "id": "84",
+    "name": "Doduo",
+    "url": "https://images.pokemontcg.io/sv3pt5/84.png",
+    "avgColor": [
+      208,
+      208,
+      208
+    ]
+  },
+  {
+    "id": "85",
+    "name": "Dodrio",
+    "url": "https://images.pokemontcg.io/sv3pt5/85.png",
+    "avgColor": [
+      204,
+      200,
+      201
+    ]
+  },
+  {
+    "id": "86",
+    "name": "Seel",
+    "url": "https://images.pokemontcg.io/sv3pt5/86.png",
+    "avgColor": [
+      142,
+      204,
+      233
+    ]
+  },
+  {
+    "id": "87",
+    "name": "Dewgong",
+    "url": "https://images.pokemontcg.io/sv3pt5/87.png",
+    "avgColor": [
+      137,
+      197,
+      223
+    ]
+  },
+  {
+    "id": "88",
+    "name": "Grimer",
+    "url": "https://images.pokemontcg.io/sv3pt5/88.png",
+    "avgColor": [
+      55,
+      95,
+      113
+    ]
+  },
+  {
+    "id": "89",
+    "name": "Muk",
+    "url": "https://images.pokemontcg.io/sv3pt5/89.png",
+    "avgColor": [
+      67,
+      93,
+      115
+    ]
+  },
+  {
+    "id": "90",
+    "name": "Shellder",
+    "url": "https://images.pokemontcg.io/sv3pt5/90.png",
+    "avgColor": [
+      127,
+      188,
+      222
+    ]
+  },
+  {
+    "id": "91",
+    "name": "Cloyster",
+    "url": "https://images.pokemontcg.io/sv3pt5/91.png",
+    "avgColor": [
+      129,
+      187,
+      221
+    ]
+  },
+  {
+    "id": "92",
+    "name": "Gastly",
+    "url": "https://images.pokemontcg.io/sv3pt5/92.png",
+    "avgColor": [
+      194,
+      153,
+      181
+    ]
+  },
+  {
+    "id": "93",
+    "name": "Haunter",
+    "url": "https://images.pokemontcg.io/sv3pt5/93.png",
+    "avgColor": [
+      186,
+      144,
+      173
+    ]
+  },
+  {
+    "id": "94",
+    "name": "Gengar",
+    "url": "https://images.pokemontcg.io/sv3pt5/94.png",
+    "avgColor": [
+      194,
+      153,
+      180
+    ]
+  },
+  {
+    "id": "95",
+    "name": "Onix",
+    "url": "https://images.pokemontcg.io/sv3pt5/95.png",
+    "avgColor": [
+      201,
+      167,
+      80
+    ]
+  },
+  {
+    "id": "96",
+    "name": "Drowzee",
+    "url": "https://images.pokemontcg.io/sv3pt5/96.png",
+    "avgColor": [
+      202,
+      146,
+      177
+    ]
+  },
+  {
+    "id": "97",
+    "name": "Hypno",
+    "url": "https://images.pokemontcg.io/sv3pt5/97.png",
+    "avgColor": [
+      188,
+      150,
+      175
+    ]
+  },
+  {
+    "id": "98",
+    "name": "Krabby",
+    "url": "https://images.pokemontcg.io/sv3pt5/98.png",
+    "avgColor": [
+      144,
+      199,
+      211
+    ]
+  },
+  {
+    "id": "99",
+    "name": "Kingler",
+    "url": "https://images.pokemontcg.io/sv3pt5/99.png",
+    "avgColor": [
+      147,
+      197,
+      217
+    ]
+  },
+  {
+    "id": "100",
+    "name": "Voltorb",
+    "url": "https://images.pokemontcg.io/sv3pt5/100.png",
+    "avgColor": [
+      231,
+      205,
+      110
+    ]
+  },
+  {
+    "id": "101",
+    "name": "Electrode",
+    "url": "https://images.pokemontcg.io/sv3pt5/101.png",
+    "avgColor": [
+      240,
+      203,
+      115
+    ]
+  },
+  {
+    "id": "102",
+    "name": "Exeggcute",
+    "url": "https://images.pokemontcg.io/sv3pt5/102.png",
+    "avgColor": [
+      190,
+      192,
+      88
+    ]
+  },
+  {
+    "id": "103",
+    "name": "Exeggutor",
+    "url": "https://images.pokemontcg.io/sv3pt5/103.png",
+    "avgColor": [
+      185,
+      190,
+      79
+    ]
+  },
+  {
+    "id": "104",
+    "name": "Cubone",
+    "url": "https://images.pokemontcg.io/sv3pt5/104.png",
+    "avgColor": [
+      203,
+      174,
+      111
+    ]
+  },
+  {
+    "id": "105",
+    "name": "Marowak",
+    "url": "https://images.pokemontcg.io/sv3pt5/105.png",
+    "avgColor": [
+      213,
+      176,
+      92
+    ]
+  },
+  {
+    "id": "106",
+    "name": "Hitmonlee",
+    "url": "https://images.pokemontcg.io/sv3pt5/106.png",
+    "avgColor": [
+      211,
+      170,
+      84
+    ]
+  },
+  {
+    "id": "107",
+    "name": "Hitmonchan",
+    "url": "https://images.pokemontcg.io/sv3pt5/107.png",
+    "avgColor": [
+      211,
+      162,
+      73
+    ]
+  },
+  {
+    "id": "108",
+    "name": "Lickitung",
+    "url": "https://images.pokemontcg.io/sv3pt5/108.png",
+    "avgColor": [
+      219,
+      212,
+      205
+    ]
+  },
+  {
+    "id": "109",
+    "name": "Koffing",
+    "url": "https://images.pokemontcg.io/sv3pt5/109.png",
+    "avgColor": [
+      98,
+      103,
+      139
+    ]
+  },
+  {
+    "id": "110",
+    "name": "Weezing",
+    "url": "https://images.pokemontcg.io/sv3pt5/110.png",
+    "avgColor": [
+      99,
+      105,
+      126
+    ]
+  },
+  {
+    "id": "111",
+    "name": "Rhyhorn",
+    "url": "https://images.pokemontcg.io/sv3pt5/111.png",
+    "avgColor": [
+      214,
+      169,
+      74
+    ]
+  },
+  {
+    "id": "112",
+    "name": "Rhydon",
+    "url": "https://images.pokemontcg.io/sv3pt5/112.png",
+    "avgColor": [
+      206,
+      168,
+      78
+    ]
+  },
+  {
+    "id": "113",
+    "name": "Chansey",
+    "url": "https://images.pokemontcg.io/sv3pt5/113.png",
+    "avgColor": [
+      208,
+      199,
+      200
+    ]
+  },
+  {
+    "id": "114",
+    "name": "Tangela",
+    "url": "https://images.pokemontcg.io/sv3pt5/114.png",
+    "avgColor": [
+      168,
+      187,
+      78
+    ]
+  },
+  {
+    "id": "115",
+    "name": "Kangaskhan",
+    "url": "https://images.pokemontcg.io/sv3pt5/115.png",
+    "avgColor": [
+      191,
+      163,
+      148
+    ]
+  },
+  {
+    "id": "116",
+    "name": "Horsea",
+    "url": "https://images.pokemontcg.io/sv3pt5/116.png",
+    "avgColor": [
+      133,
+      201,
+      222
+    ]
+  },
+  {
+    "id": "117",
+    "name": "Seadra",
+    "url": "https://images.pokemontcg.io/sv3pt5/117.png",
+    "avgColor": [
+      119,
+      190,
+      217
+    ]
+  },
+  {
+    "id": "118",
+    "name": "Goldeen",
+    "url": "https://images.pokemontcg.io/sv3pt5/118.png",
+    "avgColor": [
+      158,
+      195,
+      206
+    ]
+  },
+  {
+    "id": "119",
+    "name": "Seaking",
+    "url": "https://images.pokemontcg.io/sv3pt5/119.png",
+    "avgColor": [
+      134,
+      186,
+      211
+    ]
+  },
+  {
+    "id": "120",
+    "name": "Staryu",
+    "url": "https://images.pokemontcg.io/sv3pt5/120.png",
+    "avgColor": [
+      127,
+      178,
+      206
+    ]
+  },
+  {
+    "id": "121",
+    "name": "Starmie",
+    "url": "https://images.pokemontcg.io/sv3pt5/121.png",
+    "avgColor": [
+      117,
+      176,
+      208
+    ]
+  },
+  {
+    "id": "122",
+    "name": "Mr. Mime",
+    "url": "https://images.pokemontcg.io/sv3pt5/122.png",
+    "avgColor": [
+      186,
+      157,
+      184
+    ]
+  },
+  {
+    "id": "123",
+    "name": "Scyther",
+    "url": "https://images.pokemontcg.io/sv3pt5/123.png",
+    "avgColor": [
+      180,
+      200,
+      90
+    ]
+  },
+  {
+    "id": "124",
+    "name": "Jynx",
+    "url": "https://images.pokemontcg.io/sv3pt5/124.png",
+    "avgColor": [
+      148,
+      162,
+      177
+    ]
+  },
+  {
+    "id": "125",
+    "name": "Electabuzz",
+    "url": "https://images.pokemontcg.io/sv3pt5/125.png",
+    "avgColor": [
+      219,
+      200,
+      110
+    ]
+  },
+  {
+    "id": "126",
+    "name": "Magmar",
+    "url": "https://images.pokemontcg.io/sv3pt5/126.png",
+    "avgColor": [
+      229,
+      164,
+      107
+    ]
+  },
+  {
+    "id": "127",
+    "name": "Pinsir",
+    "url": "https://images.pokemontcg.io/sv3pt5/127.png",
+    "avgColor": [
+      167,
+      192,
+      81
+    ]
+  },
+  {
+    "id": "128",
+    "name": "Tauros",
+    "url": "https://images.pokemontcg.io/sv3pt5/128.png",
+    "avgColor": [
+      209,
+      195,
+      196
+    ]
+  },
+  {
+    "id": "129",
+    "name": "Magikarp",
+    "url": "https://images.pokemontcg.io/sv3pt5/129.png",
+    "avgColor": [
+      140,
+      195,
+      220
+    ]
+  },
+  {
+    "id": "130",
+    "name": "Gyarados",
+    "url": "https://images.pokemontcg.io/sv3pt5/130.png",
+    "avgColor": [
+      135,
+      182,
+      211
+    ]
+  },
+  {
+    "id": "131",
+    "name": "Lapras",
+    "url": "https://images.pokemontcg.io/sv3pt5/131.png",
+    "avgColor": [
+      132,
+      197,
+      225
+    ]
+  },
+  {
+    "id": "132",
+    "name": "Ditto",
+    "url": "https://images.pokemontcg.io/sv3pt5/132.png",
+    "avgColor": [
+      200,
+      209,
+      202
+    ]
+  },
+  {
+    "id": "133",
+    "name": "Eevee",
+    "url": "https://images.pokemontcg.io/sv3pt5/133.png",
+    "avgColor": [
+      217,
+      212,
+      197
+    ]
+  },
+  {
+    "id": "134",
+    "name": "Vaporeon",
+    "url": "https://images.pokemontcg.io/sv3pt5/134.png",
+    "avgColor": [
+      129,
+      194,
+      226
+    ]
+  },
+  {
+    "id": "135",
+    "name": "Jolteon",
+    "url": "https://images.pokemontcg.io/sv3pt5/135.png",
+    "avgColor": [
+      216,
+      200,
+      123
+    ]
+  },
+  {
+    "id": "136",
+    "name": "Flareon",
+    "url": "https://images.pokemontcg.io/sv3pt5/136.png",
+    "avgColor": [
+      229,
+      160,
+      117
+    ]
+  },
+  {
+    "id": "137",
+    "name": "Porygon",
+    "url": "https://images.pokemontcg.io/sv3pt5/137.png",
+    "avgColor": [
+      205,
+      203,
+      209
+    ]
+  },
+  {
+    "id": "138",
+    "name": "Omanyte",
+    "url": "https://images.pokemontcg.io/sv3pt5/138.png",
+    "avgColor": [
+      118,
+      190,
+      213
+    ]
+  },
+  {
+    "id": "139",
+    "name": "Omastar",
+    "url": "https://images.pokemontcg.io/sv3pt5/139.png",
+    "avgColor": [
+      131,
+      172,
+      201
+    ]
+  },
+  {
+    "id": "140",
+    "name": "Kabuto",
+    "url": "https://images.pokemontcg.io/sv3pt5/140.png",
+    "avgColor": [
+      208,
+      179,
+      81
+    ]
+  },
+  {
+    "id": "141",
+    "name": "Kabutops",
+    "url": "https://images.pokemontcg.io/sv3pt5/141.png",
+    "avgColor": [
+      206,
+      166,
+      77
+    ]
+  },
+  {
+    "id": "142",
+    "name": "Aerodactyl",
+    "url": "https://images.pokemontcg.io/sv3pt5/142.png",
+    "avgColor": [
+      202,
+      197,
+      196
+    ]
+  },
+  {
+    "id": "143",
+    "name": "Snorlax",
+    "url": "https://images.pokemontcg.io/sv3pt5/143.png",
+    "avgColor": [
+      201,
+      202,
+      194
+    ]
+  },
+  {
+    "id": "144",
+    "name": "Articuno",
+    "url": "https://images.pokemontcg.io/sv3pt5/144.png",
+    "avgColor": [
+      125,
+      184,
+      217
+    ]
+  },
+  {
+    "id": "145",
+    "name": "Zapdos",
+    "url": "https://images.pokemontcg.io/sv3pt5/145.png",
+    "avgColor": [
+      201,
+      169,
+      105
+    ]
+  },
+  {
+    "id": "146",
+    "name": "Moltres",
+    "url": "https://images.pokemontcg.io/sv3pt5/146.png",
+    "avgColor": [
+      231,
+      160,
+      120
+    ]
+  },
+  {
+    "id": "147",
+    "name": "Dratini",
+    "url": "https://images.pokemontcg.io/sv3pt5/147.png",
+    "avgColor": [
+      193,
+      184,
+      127
+    ]
+  },
+  {
+    "id": "148",
+    "name": "Dragonair",
+    "url": "https://images.pokemontcg.io/sv3pt5/148.png",
+    "avgColor": [
+      186,
+      175,
+      124
+    ]
+  },
+  {
+    "id": "149",
+    "name": "Dragonite",
+    "url": "https://images.pokemontcg.io/sv3pt5/149.png",
+    "avgColor": [
+      203,
+      181,
+      116
+    ]
+  },
+  {
+    "id": "150",
+    "name": "Mewtwo",
+    "url": "https://images.pokemontcg.io/sv3pt5/150.png",
+    "avgColor": [
+      185,
+      149,
+      182
+    ]
+  },
+  {
+    "id": "151",
+    "name": "Mew",
+    "url": "https://images.pokemontcg.io/sv3pt5/151.png",
+    "avgColor": [
+      196,
+      145,
+      169
+    ]
+  }
+]
