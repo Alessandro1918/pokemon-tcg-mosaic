@@ -6,6 +6,7 @@
 //  |__|
 //  |
 //  V       "y" axys
+
 function getAvgColor(pixels, imageWidth, x, y, width, height) {
 
   // function bubbleSort(arr) {

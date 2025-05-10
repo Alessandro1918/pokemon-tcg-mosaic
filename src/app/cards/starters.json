@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "Bulbasaur",
+    "url": "https://images.pokemontcg.io/sv3pt5/1.png",
+    "avgColor": [
+      185,
+      211,
+      100
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Charmander",
+    "url": "https://images.pokemontcg.io/sv3pt5/4.png",
+    "avgColor": [
+      223,
+      163,
+      115
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Squirtle",
+    "url": "https://images.pokemontcg.io/sv3pt5/7.png",
+    "avgColor": [
+      136,
+      187,
+      214
+    ]
+  }
+]

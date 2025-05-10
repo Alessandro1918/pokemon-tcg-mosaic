@@ -7,6 +7,7 @@
 //|<-  Pixel #1  ->|<- Pixel #2 ->|
 
 const getPixels = require("get-pixels")
+// const smImg = "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci80MmJlZjI1ODU5ZWY1OTIyODUzYThmMmE3YzdhNGNlZj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.JTCwo1QFSJOROohvVLUAdrY_1A3z0vvpZJUB6gP-qh0"
 
 // export function getImage(url: string): Promise<any> {  //TS
 function getImage(url) {                                  //JS
