@@ -13,7 +13,7 @@ const fileData = fs.readFileSync(inputFilename, { encoding: "utf8", flag: "r" })
 const jsonData = JSON.parse(fileData)
 
 const promises = jsonData.cards.map(card => {
-  return getImage(card.url).then(imageData => {
+  getImage(card.url).then(imageData => {
     const avgColor = getAvgColor(
       imageData.pixels,
       imageData.shape[0],

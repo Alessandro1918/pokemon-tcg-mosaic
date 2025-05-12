@@ -57,9 +57,13 @@ export default function Home() {
       for (let j = 0; j < sqrt; j++) {
         for (let i = 0; i < sqrt; i++) {
           const avgColor = getAvgColor(
-            baseImageData.pixels, baseImageData.shape[0], 
-            Math.trunc(i*sectionWidth), Math.trunc(j*sectionHeight), 
-            Math.trunc(sectionWidth), Math.trunc(sectionHeight))
+            baseImageData.pixels, 
+            baseImageData.shape[0], 
+            Math.trunc(i*sectionWidth), 
+            Math.trunc(j*sectionHeight), 
+            Math.trunc(sectionWidth), 
+            Math.trunc(sectionHeight)
+          )
           const bestMatch = getBestColorFromDb(avgColor)
           console.log(
             `Section ${(i+1)+(j*sqrt)}:`,
@@ -104,7 +108,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center">
       {/* <h1>Hello, world!</h1> */}
-      {/* Mobile zoom/scroll works with any width, desktops need this sm:w-max.
+      {/* Mobile zoom/scroll works with any width, but on desktops the grid needs a set width to zoom in it.
       Issue: at 200% zoom on desktop, the breakpoint changes to mobile, and I lose the zoom/scroll feat. */}
       <div className={`
         sm:w-max
@@ -119,7 +123,7 @@ export default function Home() {
                 src={e.url}
                 alt={e.name}
                 title={e.name}
-                className="w-5 aspect-auto opacity-100"
+                className="w-5 aspect-auto opacity-100" //If I set grid width, img will take the space of the grid section
               />
             )
           })

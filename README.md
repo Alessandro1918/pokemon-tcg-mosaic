@@ -1,13 +1,11 @@
 # pokemon-tcg-mosaic
 
-Status: 🚧 Em construção 🚧
-
 ## 🚀 Projeto
-
-Confira online em: https://pokemon-tcg-mosaic.vercel.app
 
 Um mosaico de uma carta de Pokemon, usando outras cartas de Pokemon.</br>
 Projeto inspirado no vídeo [30,000 Pokémon Card Mosaic](https://www.youtube.com/watch?v=ZRUCJFyFWJQ).
+
+Confira online em: https://pokemon-tcg-mosaic.vercel.app
 
 <img 
   alt="thumbnail" 
@@ -28,6 +26,7 @@ Projeto inspirado no vídeo [30,000 Pokémon Card Mosaic](https://www.youtube.co
 
 #### 📊 Dataset
 
+Gerando uma lista de cores a partir de uma lista de imagens:
 ```bash
   cd src/app                                   #change to this directory
   node getAvgColorList.js sets/starters.json   #runs this .js script with this .json file as input 
@@ -37,9 +36,9 @@ Input:
 ```json5
 //file: sets/starters.json
 {
-  "id": "sv3pt5",
-  "name": "151",
-  "series": "Scarlet & Violet",
+  "id": "sk",
+  "name": "Starters - Kanto",
+  "series": "Custom",
   "cards": [
     {
       "id": "1",
@@ -100,3 +99,7 @@ Squirtle avgColor: [136,187,214] = ![Badge](https://img.shields.io/badge/_____-%
 Acesar pelo navegador: http://localhost:3000
 
 Ou, confira online em: https://pokemon-tcg-mosaic.vercel.app
+
+### 📋 TODO:
+
+- Controle de zoom da imagem (no computador o zoom functiona só até 200%, no celular até 500%)
