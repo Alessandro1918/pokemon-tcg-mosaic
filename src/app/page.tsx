@@ -16,7 +16,9 @@ export default function Home() {
 
   const [ grid, setGrid ] = useState<CardProp[]>([])
 
-  const n = 50*50 //number of cards in the entire grid
+  //size ˆ 2 = number of cards in the entire grid
+  //(Because the grid section has the same ratio as the base image, grid-col count = grid-row count)
+  const gridSize = 50
 
   const tcgBack = "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg"
   
@@ -40,22 +42,22 @@ export default function Home() {
     //     // setGrid([...grid, cards[grid.length % 5]])
     //     setGrid(prevGrid => {
     //       // console.log(prevGrid.length % 5) //0, 1, 2, 3, 4, 0, 1, 2, ...
-    //       return [...prevGrid, cards[prevGrid.length % 5]];
+    //       return [...prevGrid, cards[prevGrid.length % 5]]
     //     })
     //   }, i * 250)
     // }
 
     (async () => {
-      // const baseImageData = await getImage("https://corsproxy.io/" + tcgBack)
-      const baseImageData = await getImage(tcgBack)
+      const baseImage = tcgBack
+      // const baseImageData = await getImage("https://corsproxy.io/" + baseImage)
+      const baseImageData = await getImage(baseImage)
 
       //Split the base image in small image sections
-      const sqrt = Math.sqrt(n) //400 images total? SqRt(400) = 20; and width * height = total
-      const sectionWidth = baseImageData.shape[0]/sqrt
-      const sectionHeight = baseImageData.shape[1]/sqrt
+      const sectionWidth = baseImageData.shape[0]/gridSize
+      const sectionHeight = baseImageData.shape[1]/gridSize
 
-      for (let j = 0; j < sqrt; j++) {
-        for (let i = 0; i < sqrt; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        for (let i = 0; i < gridSize; i++) {
           const avgColor = getAvgColor(
             baseImageData.pixels, 
             baseImageData.shape[0], 
@@ -66,14 +68,15 @@ export default function Home() {
           )
           const bestMatch = getBestColorFromDb(avgColor)
           console.log(
-            `Section ${(i+1)+(j*sqrt)}:`,
+            `Section ${(i+1)+(j*gridSize)}:`,
             `x=${Math.trunc(i*sectionWidth)}`,
             `y=${Math.trunc(j*sectionHeight)}`,
             `avgColor: ${avgColor}`,
-            `bestMatch: ${bestMatch.avgColor} (${bestMatch.name})`)
-            setGrid(prevGrid => {
-              return [...prevGrid, bestMatch];
-            })
+            `bestMatch: ${bestMatch.avgColor} (${bestMatch.name})`
+          )
+          setGrid(prevGrid => {
+            return [...prevGrid, bestMatch]
+          })
         }
       }
     })()
