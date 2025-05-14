@@ -16,7 +16,21 @@ export default function Home() {
 
   const [ grid, setGrid ] = useState<CardProp[]>([])
 
-  const n = 50*50 //number of cards in the entire grid
+  //size ˆ 2 = number of cards in the entire grid
+  //(Because the grid section has the same ratio as the base image, grid-col count = grid-row count)
+  const gridSize = 50
+
+  //zoom init @ zero, update only if client-side
+  const [ zoomLevel, setZoomLevel ] = useState(0)
+  const [ minZoom, setMinZoom ] = useState(0)
+  const [ maxZoom, setMaxZoom ] = useState(0)
+  useEffect(() => {
+    const zoomMin = window.innerWidth < 640 ? 2 : 5       //mobile:w-2 (8px), sm:w-5 (20px)
+    const zoomMax = window.innerWidth < 640 ? 100 : 250   //?
+    setZoomLevel(zoomMin)
+    setMinZoom(zoomMin)
+    setMaxZoom(zoomMax)
+  }, [])
 
   const tcgBack = "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg"
   
@@ -40,22 +54,22 @@ export default function Home() {
     //     // setGrid([...grid, cards[grid.length % 5]])
     //     setGrid(prevGrid => {
     //       // console.log(prevGrid.length % 5) //0, 1, 2, 3, 4, 0, 1, 2, ...
-    //       return [...prevGrid, cards[prevGrid.length % 5]];
+    //       return [...prevGrid, cards[prevGrid.length % 5]]
     //     })
     //   }, i * 250)
     // }
 
     (async () => {
-      // const baseImageData = await getImage("https://corsproxy.io/" + tcgBack)
-      const baseImageData = await getImage(tcgBack)
+      const baseImage = tcgBack
+      // const baseImageData = await getImage("https://corsproxy.io/" + baseImage)
+      const baseImageData = await getImage(baseImage)
 
       //Split the base image in small image sections
-      const sqrt = Math.sqrt(n) //400 images total? SqRt(400) = 20; and width * height = total
-      const sectionWidth = baseImageData.shape[0]/sqrt
-      const sectionHeight = baseImageData.shape[1]/sqrt
+      const sectionWidth = baseImageData.shape[0]/gridSize
+      const sectionHeight = baseImageData.shape[1]/gridSize
 
-      for (let j = 0; j < sqrt; j++) {
-        for (let i = 0; i < sqrt; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        for (let i = 0; i < gridSize; i++) {
           const avgColor = getAvgColor(
             baseImageData.pixels, 
             baseImageData.shape[0], 
@@ -66,14 +80,15 @@ export default function Home() {
           )
           const bestMatch = getBestColorFromDb(avgColor)
           console.log(
-            `Section ${(i+1)+(j*sqrt)}:`,
+            `Section ${(i+1)+(j*gridSize)}:`,
             `x=${Math.trunc(i*sectionWidth)}`,
             `y=${Math.trunc(j*sectionHeight)}`,
             `avgColor: ${avgColor}`,
-            `bestMatch: ${bestMatch.avgColor} (${bestMatch.name})`)
-            setGrid(prevGrid => {
-              return [...prevGrid, bestMatch];
-            })
+            `bestMatch: ${bestMatch.avgColor} (${bestMatch.name})`
+          )
+          setGrid(prevGrid => {
+            return [...prevGrid, bestMatch]
+          })
         }
       }
     })()
@@ -108,26 +123,41 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center">
       {/* <h1>Hello, world!</h1> */}
-      {/* Mobile zoom/scroll works with any width, but on desktops the grid needs a set width to zoom in it.
-      Issue: at 200% zoom on desktop, the breakpoint changes to mobile, and I lose the zoom/scroll feat. */}
-      <div className={`
-        sm:w-max
-        grid grid-cols-50 
-        zbg-cover zbg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]
-      `}>
-        {
-          grid.map((e, i) => {
-            return (
-              <img 
-                key={i}
-                src={e.url}
-                alt={e.name}
-                title={e.name}
-                className="w-5 aspect-auto opacity-100" //If I set grid width, img will take the space of the grid section
-              />
-            )
-          })
-        }
+
+      {/* Zoom Component: */}
+      <div className="flex flex-row items-center gap-4">
+        <h1 className="text-xl">Zoom:</h1>
+        <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (zoomLevel > minZoom) {setZoomLevel(zoomLevel - 1)}}}>–</button>
+        <input 
+          type="range" value={zoomLevel} min={minZoom} max={maxZoom} 
+          onChange={(e) => {setZoomLevel(+e.target.value)}}
+          className="w-3xs sm:w-md cursor-pointer"
+        />
+        <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (zoomLevel < maxZoom) {setZoomLevel(zoomLevel + 1)}}}>+</button>
+      </div>
+
+      {/* Outer div width: 50 cards of N pixels each (mobile:w-2 (8px), sm:w-5 (20px)) */}
+      {/* Outer div height: 50 cards of 1:1.4 ratio */}
+      <div className="overflow-auto w-[calc(50*8px)] h-[calc(50*8*1.4px)] sm:w-[calc(50*20px)] sm:h-[calc(50*20*1.4px)]">
+        <div className={` 
+          grid grid-cols-50 min-w-max
+          zbg-cover zbg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]
+        `}>
+          {
+            grid.map((e, i) => {
+              return (
+                <img 
+                  key={i}
+                  src={e.url}
+                  alt={e.name}
+                  title={e.name}
+                  // className="w-5 aspect-auto opacity-100"
+                  style={{ width: `${zoomLevel * 4}px` }} //bypass Tailwind’s width utilities and instead uses CSS inline style
+                />
+              )
+            })
+          }
+        </div>
       </div>
     </div>
   )
