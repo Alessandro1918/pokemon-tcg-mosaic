@@ -20,6 +20,10 @@ export default function Home() {
   //(Because the grid section has the same ratio as the base image, grid-col count = grid-row count)
   const gridSize = 50
 
+  const [ cardWidth, setCardWidth ] = useState(0)
+  //cardWidth init @ zero, update only if client-side (mobile:w-2 (8px), sm:w-5 (20px)):
+  useEffect(() => {setCardWidth(window.innerWidth < 640 ? 2 : 5)}, [])
+
   const tcgBack = "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg"
   
   // const cards = [
@@ -111,26 +115,36 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center">
       {/* <h1>Hello, world!</h1> */}
-      {/* Mobile zoom/scroll works with any width, but on desktops the grid needs a set width to zoom in it.
-      Issue: at 200% zoom on desktop, the breakpoint changes to mobile, and I lose the zoom/scroll feat. */}
-      <div className={`
-        sm:w-max
-        grid grid-cols-50 
-        zbg-cover zbg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]
-      `}>
-        {
-          grid.map((e, i) => {
-            return (
-              <img 
-                key={i}
-                src={e.url}
-                alt={e.name}
-                title={e.name}
-                className="w-5 aspect-auto opacity-100" //If I set grid width, img will take the space of the grid section
-              />
-            )
-          })
-        }
+
+      {/* Zoom Component: */}
+      <div className="flex items-center flex-row gap-4">
+        <button className="text-2xl font-black cursor-pointer" onClick={() => setCardWidth(cardWidth - 1)}>-</button>
+        <h1>Width: {cardWidth} ({cardWidth * 4}px)</h1>
+        <button className="text-2xl font-black cursor-pointer" onClick={() => setCardWidth(cardWidth + 1)}>+</button>
+      </div>
+
+      {/* Outer div width: 50 cards of N pixels each (mobile:w-2 (8px), sm:w-5 (20px)) */}
+      {/* Outer div height: 50 cards of 1:1.4 ratio */}
+      <div className="overflow-auto w-[calc(50*8px)] h-[calc(50*8*1.4px)] sm:w-[calc(50*20px)] sm:h-[calc(50*20*1.4px)]">
+        <div className={` 
+          grid grid-cols-50 min-w-max
+          zbg-cover zbg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]
+        `}>
+          {
+            grid.map((e, i) => {
+              return (
+                <img 
+                  key={i}
+                  src={e.url}
+                  alt={e.name}
+                  title={e.name}
+                  // className="w-5 aspect-auto opacity-100"
+                  style={{ width: `${cardWidth * 4}px` }} //bypass Tailwind’s width utilities and instead uses CSS inline style
+                />
+              )
+            })
+          }
+        </div>
       </div>
     </div>
   )
