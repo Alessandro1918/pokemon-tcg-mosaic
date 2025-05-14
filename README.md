@@ -2,17 +2,34 @@
 
 ## 🚀 Projeto
 
-Um mosaico de uma carta de Pokemon, usando outras cartas de Pokemon.</br>
+<div align="center">
+  <img 
+    width="80%"
+    alt="thumbnail" 
+    title="thumbnail" 
+    src="github_assets/youtube_thumbnail.png"
+  />
+</div>
+
+</br>
+Um mosaico de uma carta de Pokemon, usando outras cartas de Pokemon.
+
 Projeto inspirado no vídeo [30,000 Pokémon Card Mosaic](https://www.youtube.com/watch?v=ZRUCJFyFWJQ).
 
 Confira online em: https://pokemon-tcg-mosaic.vercel.app
+</br></br>
 
-<img 
-  alt="thumbnail" 
-  title="thumbnail" 
-  src="github_assets/youtube_thumbnail.png" 
-  width="600px" 
-/>
+<div align="center">
+  <img 
+    width="30%" alt="tcg-back-original" title="tcg-back-original" 
+    src="https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg"
+  />
+  ➡️ 
+  <img 
+    width="30%" alt="tcg-back-mosaic" title="tcg-back-mosaic" 
+    src="github_assets/tcg-back-mosaic.jpg"
+  />
+</div>
 
 ## 🗂️ Utilização
 
@@ -102,4 +119,7 @@ Ou, confira online em: https://pokemon-tcg-mosaic.vercel.app
 
 ### 📋 TODO:
 
-- Controle de zoom da imagem (no computador o zoom functiona só até 200%, no celular até 500%)
+- ✅ Otimizar para mobile/desktop
+- ✅ Controle de zoom da imagem
+- 🔲 Selecionar image base a partir de uma lista
+
