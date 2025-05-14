@@ -20,9 +20,17 @@ export default function Home() {
   //(Because the grid section has the same ratio as the base image, grid-col count = grid-row count)
   const gridSize = 50
 
-  const [ cardWidth, setCardWidth ] = useState(0)
-  //cardWidth init @ zero, update only if client-side (mobile:w-2 (8px), sm:w-5 (20px)):
-  useEffect(() => {setCardWidth(window.innerWidth < 640 ? 2 : 5)}, [])
+  //zoom init @ zero, update only if client-side
+  const [ zoomLevel, setZoomLevel ] = useState(0)
+  const [ minZoom, setMinZoom ] = useState(0)
+  const [ maxZoom, setMaxZoom ] = useState(0)
+  useEffect(() => {
+    const zoomMin = window.innerWidth < 640 ? 2 : 5       //mobile:w-2 (8px), sm:w-5 (20px)
+    const zoomMax = window.innerWidth < 640 ? 100 : 250   //?
+    setZoomLevel(zoomMin)
+    setMinZoom(zoomMin)
+    setMaxZoom(zoomMax)
+  }, [])
 
   const tcgBack = "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg"
   
@@ -117,10 +125,15 @@ export default function Home() {
       {/* <h1>Hello, world!</h1> */}
 
       {/* Zoom Component: */}
-      <div className="flex items-center flex-row gap-4">
-        <button className="text-2xl font-black cursor-pointer" onClick={() => setCardWidth(cardWidth - 1)}>-</button>
-        <h1>Width: {cardWidth} ({cardWidth * 4}px)</h1>
-        <button className="text-2xl font-black cursor-pointer" onClick={() => setCardWidth(cardWidth + 1)}>+</button>
+      <div className="flex flex-row items-center gap-4">
+        <h1 className="text-xl">Zoom:</h1>
+        <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (zoomLevel > minZoom) {setZoomLevel(zoomLevel - 1)}}}>–</button>
+        <input 
+          type="range" value={zoomLevel} min={minZoom} max={maxZoom} 
+          onChange={(e) => {setZoomLevel(+e.target.value)}}
+          className="w-3xs sm:w-md cursor-pointer"
+        />
+        <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (zoomLevel < maxZoom) {setZoomLevel(zoomLevel + 1)}}}>+</button>
       </div>
 
       {/* Outer div width: 50 cards of N pixels each (mobile:w-2 (8px), sm:w-5 (20px)) */}
@@ -139,7 +152,7 @@ export default function Home() {
                   alt={e.name}
                   title={e.name}
                   // className="w-5 aspect-auto opacity-100"
-                  style={{ width: `${cardWidth * 4}px` }} //bypass Tailwind’s width utilities and instead uses CSS inline style
+                  style={{ width: `${zoomLevel * 4}px` }} //bypass Tailwind’s width utilities and instead uses CSS inline style
                 />
               )
             })
