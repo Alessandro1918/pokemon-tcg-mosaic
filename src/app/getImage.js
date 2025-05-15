@@ -18,7 +18,7 @@ function getImage(url) {                                  //JS
         console.log("Bad image path")
         reject(err)
       } else {
-        console.log("Got pixels:", pixels.shape.slice(), pixels.data)
+        // console.log("Got pixels:", pixels.shape.slice(), pixels.data)
         resolve({shape: pixels.shape.slice(), pixels: pixels.data})
       }
     })

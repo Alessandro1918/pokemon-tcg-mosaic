@@ -1,4 +1,4 @@
-//Reads a json file with a list of image urls, writes a json file with the each image respective average color.
+//Reads a json file with a list of image urls, writes a json file with each image's respective average color.
 //usage: cd src/app && node getAvgColorList.js sets/sv3pt5.json
 
 const fs = require("fs")
@@ -12,6 +12,7 @@ const fileData = fs.readFileSync(inputFilename, { encoding: "utf8", flag: "r" })
 
 const jsonData = JSON.parse(fileData)
 
+//Each map element returns a promise, because "getImage" is async.
 const promises = jsonData.cards.map(card => {
   getImage(card.url).then(imageData => {
     const avgColor = getAvgColor(
@@ -27,6 +28,7 @@ const promises = jsonData.cards.map(card => {
   })
 })
 
+//Get the result of all promises, not just the first, before outputs the result.
 Promise.all(promises).then(cards => {
   let outputData = JSON.stringify(cards, null, 2)
 
