@@ -89,6 +89,12 @@ export default function Home() {
     })
   }
 
+  function getBaseImageName() {
+    return baseImageIndex == -1 
+    ? "TCG - Verso" 
+    : `${baseImageList[baseImageIndex].name} (${baseImageList[baseImageIndex].set.series} - ${baseImageList[baseImageIndex].set.name}: #${baseImageList[baseImageIndex].number})`
+  }
+
   async function makeMosaic() {
     setGrid([]) //reset grid
 
@@ -200,20 +206,31 @@ export default function Home() {
 
       {/* Slider: */}
       <div className="mt-2 flex flex-row items-center gap-4">
-        <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (baseImageIndex > 0 && baseImageIndex < baseImageList.length) {setBaseImageIndex(baseImageIndex - 1)}}}>{"<"}</button>
+        <button className="text-2xl font-bold disabled:text-gray-400 cursor-pointer disabled:cursor-default" disabled={!(baseImageIndex > 0 && baseImageIndex < baseImageList.length)} onClick={() => {if (baseImageIndex > 0 && baseImageIndex < baseImageList.length) {setBaseImageIndex(baseImageIndex - 1)}}}>{"<"}</button>
         <img 
           src={baseImage}
-          alt={baseImageIndex == -1 ? "TCG - Verso" : `${baseImageList[baseImageIndex].name} (${baseImageList[baseImageIndex].set.series} - ${baseImageList[baseImageIndex].set.name}: #${baseImageList[baseImageIndex].number})`}
-          title={baseImageIndex == -1 ? "TCG - Verso" : `${baseImageList[baseImageIndex].name} (${baseImageList[baseImageIndex].set.series} - ${baseImageList[baseImageIndex].set.name}: #${baseImageList[baseImageIndex].number})`}
+          alt={getBaseImageName()}
+          title={getBaseImageName()}
           className="w-40 aspect-auto"
         />        
-        <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (baseImageIndex >= 0 && baseImageIndex < baseImageList.length -1) {setBaseImageIndex(baseImageIndex + 1)}}}>{">"}</button>
+        <button className="text-2xl font-bold disabled:text-gray-400 cursor-pointer disabled:cursor-default" disabled={!(baseImageIndex >= 0 && baseImageIndex < baseImageList.length -1)} onClick={() => {if (baseImageIndex >= 0 && baseImageIndex < baseImageList.length -1) {setBaseImageIndex(baseImageIndex + 1)}}}>{">"}</button>
       </div>
+      <h1 className="mt-1 mb-2 text-xs">{getBaseImageName()}</h1>
       
       <button 
         onClick={() => makeMosaic()}
         // disabled={true}
-        className="mt-2 bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-400 disabled:text-gray-600 font-bold px-2 py-1 rounded cursor-pointer"
+        //OBS: Visual transformation to simulate a 3D key press:
+        //1. Button will have a "margin-top" and a "border-bottom";
+        //2. When clicked, shrink "border-bottom" height by half, and lower the button by adding to the "margin-top" this same amount of pixels.
+        className={
+          `font-bold px-2 py-1 rounded 
+          bg-blue-600 hover:bg-blue-700 text-white border-blue-800 cursor-pointer 
+          disabled:bg-gray-400 disabled:text-gray-600 disabled:border-gray-500 disabled:cursor-default
+           mt-[0px] border-b-[6px]
+           disabled:active:mt-[0px] disabled:active:border-b-[6px] 
+           active:mt-[3px] active:border-b-[3px]`
+        }
       >
         Converter!
       </button>
