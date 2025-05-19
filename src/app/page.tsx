@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import getImage from "./getImage"
 import getAvgColor from "./getAvgColor"
+import getBestColor from "./getBestColor"
 import dataset from "./cards/sv3pt5.json"
 
 type GridCardProp = {
@@ -115,7 +116,7 @@ export default function Home() {
           Math.trunc(sectionWidth), 
           Math.trunc(sectionHeight)
         )
-        const bestMatch = getBestColorFromDb(avgColor)
+        const bestMatch = getBestColor(avgColor, cards)
         // console.log(
         //   `Section ${(i+1)+(j*gridSize)}:`,
         //   `x=${Math.trunc(i*sectionWidth)}`,
@@ -155,32 +156,6 @@ export default function Home() {
       makeMosaic()
     })()
   }, [])
-
-  //For 2 given colors ([r, g, b], [...]), get their difference, from 0 (equal) to 1 (black to white).
-  function getColorDifference(color1: number[], color2: number[]) {
-    //V1 - Euclidian distance in the RGB 3-axys spaces:
-    return (
-      Math.abs(color1[0] - color2[0]) / 255 / 3 +
-      Math.abs(color1[1] - color2[1]) / 255 / 3 +
-      Math.abs(color1[2] - color2[2]) / 255 / 3
-    )
-  }
-
-  //For a given RBG color, returns the option with the most similar color from the list of cards.
-  function getBestColorFromDb(color: number[]) {
-    var bestMatch = cards[0]
-    var diffFromBest = 1
-    cards.map(card => {
-      const colorDiff = getColorDifference(color, card.avgColor)
-      // console.log(`Card: ${card.name}`, `Color difference: ${colorDiff}`)
-      if (colorDiff < diffFromBest) {
-        bestMatch = card
-        diffFromBest = colorDiff
-      }
-    })
-    // console.log(`Best match: ${bestMatch.name}`, `Color difference: ${diffFromBest}`)
-    return bestMatch
-  }
 
   return (
     <div className="flex flex-col items-center justify-center">
