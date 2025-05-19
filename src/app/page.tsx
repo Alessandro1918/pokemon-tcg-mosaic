@@ -99,8 +99,8 @@ export default function Home() {
   async function makeMosaic() {
     setGrid([]) //reset grid
 
-    // const baseImageData = await getImage("https://corsproxy.io/" + baseImage)   //Dev
-    const baseImageData = await getImage(baseImage)    //Prod
+    const baseImageData = await getImage("https://corsproxy.io/" + baseImage)   //Dev
+    // const baseImageData = await getImage(baseImage)    //Prod
 
     //Split the base image in small image sections
     const sectionWidth = baseImageData.shape[0]/gridSize
