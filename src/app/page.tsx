@@ -63,6 +63,71 @@ export default function Home() {
     setBaseImageIndex(-1)
   }
 
+  function getBaseImageList(query: string) {
+    if (query == "TCG-back") {
+      resetBaseImageList()
+      setBaseImageIndex(-1)
+      return
+    }
+    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:${query}`).then(response => {
+      // console.log(response.data)
+      const cards:ApiCardProp[] = []
+      response.data.data.map((e: any) => {
+        cards.push({
+          id: e.id,
+          name: e.name,
+          set: {
+            name: e.set.name,
+            series: e.set.series,
+          },
+          number: e.number,
+          image: e.images.small
+        })
+      })
+      setBaseImageList(cards)
+      setBaseImageIndex(0)
+    })
+  }
+
+  async function makeMosaic() {
+    setGrid([]) //reset grid
+
+    // const baseImageData = await getImage("https://corsproxy.io/" + baseImage)   //Dev
+    const baseImageData = await getImage(baseImage)    //Prod
+
+    //Split the base image in small image sections
+    const sectionWidth = baseImageData.shape[0]/gridSize
+    const sectionHeight = baseImageData.shape[1]/gridSize
+
+    for (let j = 0; j < gridSize; j++) {
+      for (let i = 0; i < gridSize; i++) {
+        const avgColor = getAvgColor(
+          baseImageData.pixels, 
+          baseImageData.shape[0], 
+          Math.trunc(i*sectionWidth), 
+          Math.trunc(j*sectionHeight), 
+          Math.trunc(sectionWidth), 
+          Math.trunc(sectionHeight)
+        )
+        const bestMatch = getBestColorFromDb(avgColor)
+        // console.log(
+        //   `Section ${(i+1)+(j*gridSize)}:`,
+        //   `x=${Math.trunc(i*sectionWidth)}`,
+        //   `y=${Math.trunc(j*sectionHeight)}`,
+        //   `avgColor: ${avgColor}`,
+        //   `bestMatch: ${bestMatch.avgColor} (${bestMatch.name})`
+        // )
+        setGrid(prevGrid => {
+          return [...prevGrid, bestMatch]
+        })
+      }
+    }
+  }
+
+  useEffect(() => {
+    setBaseImage(baseImageIndex == -1 ? tcgBack : baseImageList[baseImageIndex].image)
+  }, [baseImageList, baseImageIndex])
+
   useEffect(() => {
     //Init grid - V1
     // setGrid([cards[1], cards[2], cards[3], cards[4], cards[5], cards[1], cards[2], cards[3], cards[4]]) // 9 items total, grid with 3 collumns, rows = 3 
@@ -79,37 +144,9 @@ export default function Home() {
     //   }, i * 250)
     // }
 
+    //Mosaic grid with images from the db - V3
     (async () => {
-      // const baseImageData = await getImage("https://corsproxy.io/" + baseImage)
-      const baseImageData = await getImage(baseImage)
-
-      //Split the base image in small image sections
-      const sectionWidth = baseImageData.shape[0]/gridSize
-      const sectionHeight = baseImageData.shape[1]/gridSize
-
-      for (let j = 0; j < gridSize; j++) {
-        for (let i = 0; i < gridSize; i++) {
-          const avgColor = getAvgColor(
-            baseImageData.pixels, 
-            baseImageData.shape[0], 
-            Math.trunc(i*sectionWidth), 
-            Math.trunc(j*sectionHeight), 
-            Math.trunc(sectionWidth), 
-            Math.trunc(sectionHeight)
-          )
-          const bestMatch = getBestColorFromDb(avgColor)
-          // console.log(
-          //   `Section ${(i+1)+(j*gridSize)}:`,
-          //   `x=${Math.trunc(i*sectionWidth)}`,
-          //   `y=${Math.trunc(j*sectionHeight)}`,
-          //   `avgColor: ${avgColor}`,
-          //   `bestMatch: ${bestMatch.avgColor} (${bestMatch.name})`
-          // )
-          setGrid(prevGrid => {
-            return [...prevGrid, bestMatch]
-          })
-        }
-      }
+      makeMosaic()
     })()
   }, [])
 
@@ -139,36 +176,6 @@ export default function Home() {
     return bestMatch
   }
 
-  function getCardsFromAPI(query: string) {
-    if (query == "TCG-back") {
-      resetBaseImageList()
-      setBaseImageIndex(-1)
-      return
-    }
-    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:${query}`).then(response => {
-      // console.log(response.data)
-      const cards:ApiCardProp[] = []
-      response.data.data.map((e: any) => {
-        cards.push({
-          id: e.id,
-          name: e.name,
-          set: {
-            name: e.set.name,
-            series: e.set.series,
-          },
-          number: e.number,
-          image: e.images.small
-        })
-      })
-      setBaseImageList(cards)
-      setBaseImageIndex(0)
-    })
-  }
-
-  useEffect(() => {
-    setBaseImage(baseImageIndex == -1 ? tcgBack : baseImageList[baseImageIndex].image)
-  }, [baseImageList, baseImageIndex])
-
   return (
     <div className="flex flex-col items-center justify-center">
       {/* <h1>Hello, world!</h1> */}
@@ -178,7 +185,7 @@ export default function Home() {
         Selecione uma carta:
         <select 
           className="mx-1"
-          onChange={(e) => getCardsFromAPI(e.target.value)}
+          onChange={(e) => getBaseImageList(e.target.value)}
         >
           <option value="TCG-back">TCG - Verso</option>
           {
@@ -199,11 +206,15 @@ export default function Home() {
           alt={baseImageIndex == -1 ? "TCG - Verso" : `${baseImageList[baseImageIndex].name} (${baseImageList[baseImageIndex].set.series} - ${baseImageList[baseImageIndex].set.name}: #${baseImageList[baseImageIndex].number})`}
           title={baseImageIndex == -1 ? "TCG - Verso" : `${baseImageList[baseImageIndex].name} (${baseImageList[baseImageIndex].set.series} - ${baseImageList[baseImageIndex].set.name}: #${baseImageList[baseImageIndex].number})`}
           className="w-40 aspect-auto"
-        />
+        />        
         <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (baseImageIndex >= 0 && baseImageIndex < baseImageList.length -1) {setBaseImageIndex(baseImageIndex + 1)}}}>{">"}</button>
       </div>
       
-      <button className="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-2 py-1 rounded cursor-pointer">
+      <button 
+        onClick={() => makeMosaic()}
+        // disabled={true}
+        className="mt-2 bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-400 disabled:text-gray-600 font-bold px-2 py-1 rounded cursor-pointer"
+      >
         Converter!
       </button>
 
