@@ -38,12 +38,12 @@ export default function Home() {
   const [ baseImageIndex, setBaseImageIndex ] = useState(-1)
 
   //init @ zero, update only if client-side
-  const [ zoomLevel, setZoomLevel ] = useState(0)
+  const [ zoomLevel, setZoomLevel ] = useState(0)           //will multiply section width by 4 to get size in px
   const [ minZoom, setMinZoom ] = useState(0)
   const [ maxZoom, setMaxZoom ] = useState(0)
   useEffect(() => {
-    const zoomMin = window.innerWidth < 640 ? 2 : 5       //mobile:w-2 (8px), sm:w-5 (20px)
-    const zoomMax = window.innerWidth < 640 ? 100 : 250   //?
+    const zoomMin = window.innerWidth < 640 ? 2 : 2.5       //zoomMin = minCardWidth = 8px, 8/4 = 2
+    const zoomMax = window.innerWidth < 640 ? 100 : 125     //zoomMax = gridWidth = 50 * 8px = 400px, 400/4 = 100
     setZoomLevel(zoomMin)
     setMinZoom(zoomMin)
     setMaxZoom(zoomMax)
@@ -225,7 +225,7 @@ export default function Home() {
       {/* Grid: */}
       {/* Outer div width: 50 cards of N pixels each (mobile:w-2 (8px), sm:w-5 (20px)) */}
       {/* Outer div height: 50 cards of 1:1.4 ratio */}
-      <div className="mt-2 overflow-auto w-[calc(50*8px)] h-[calc(50*8*1.4px)] sm:w-[calc(50*20px)] sm:h-[calc(50*20*1.4px)]">
+      <div className="mt-2 overflow-auto w-[calc(50*8px)] h-[calc(50*8*1.4px)] sm:w-[calc(50*10px)] sm:h-[calc(50*10*1.4px)]">
         <div className={` 
           grid grid-cols-50 min-w-max
           zbg-cover zbg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]
