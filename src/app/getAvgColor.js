@@ -56,7 +56,7 @@ function getAvgColor(pixels, imageWidth, x, y, width, height) {
     const section = []
     for (let j = y; j < y+height; j++) {
       for (let i = x; i < x+width; i++) {
-        // console.log("i:", i, "j:", j, "index:", ((i*4) + j*imageWidth*4) + channel, "value:", pixels[((i*4) + j*imageWidth) + channel])
+        // console.log("channel:", channel, "i:", i, "j:", j, "index:", ((i*4) + j*imageWidth*4) + channel, "value:", pixels[((i*4) + j*imageWidth) + channel])
         section.push(pixels[((i*4) + j*imageWidth*4) + channel])
       }
     }
@@ -64,7 +64,7 @@ function getAvgColor(pixels, imageWidth, x, y, width, height) {
     // bubbleSort(section)
     quickSort(section)
     // console.log(section)
-    avg[channel] = section[section.length / 2]
+    avg[channel] = section[Math.floor(section.length / 2)]
   }
   // console.log(avg)
   return avg

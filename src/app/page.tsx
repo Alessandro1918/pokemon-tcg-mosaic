@@ -24,31 +24,66 @@ type ApiCardProp = {
   image: string
 }
 
+const gridConstants = {
+  25: { 
+    screen: { 
+      mobile: { zoomMin: 4, zoomMax: 100, cardWidth: 16 /*/px */ },
+      sm: { zoomMin: 5, zoomMax: 125, cardWidth: 20 /*/px */ } 
+    }
+  },
+  50: { 
+    screen: { 
+      mobile: { 
+        zoomMin: 2,   //grid section width = 8px, 8/4 = 2
+        zoomMax: 100, //zoom needed to section width = grid width: zoomMin * gridSize
+        cardWidth: 8  //in pixels. Grid section width is hardcoded, and grid width = gridSize * section width
+      },
+      sm: { zoomMin: 2.5, zoomMax: 125, cardWidth: 10 /*/px */ } 
+    }
+  },
+  75: { 
+    screen: { 
+      mobile: { zoomMin: 1.5, zoomMax: 100, cardWidth: 6 /*/px */ },
+      sm: { zoomMin: 1.875, zoomMax: 125, cardWidth: 7.5 /*/px */ } 
+    }
+  },
+  100: { 
+    screen: { 
+      mobile: { zoomMin: 1, zoomMax: 100, cardWidth: 4 /*/px */ },
+      sm: { zoomMin: 1.25, zoomMax: 125, cardWidth: 5 /*/px */ } 
+    }
+  }
+}
+
 export default function Home() {
 
-  //size ˆ 2 = number of cards in the entire grid
+  //Number of cards in the entire grid = size ˆ 2
   //(Because the grid section has the same ratio as the base image, grid-col count = grid-row count)
-  const gridSize = 50
-
+  // const gridSize = 50
+  const [ gridSize, setGridSize ] = useState<25 | 50 | 75 | 100>(50)  //or: <keyof typeof gridConstants>
   const [ grid, setGrid ] = useState<GridCardProp[]>([])
+  const [ isGridLoading, setIsGridLoading ] = useState(false)
 
   const tcgBack = "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg"
   const [ baseImage, setBaseImage ] = useState(tcgBack)
   const [ baseImageList, setBaseImageList ] = useState<ApiCardProp[]>([])
   const [ baseImageIndex, setBaseImageIndex ] = useState(-1)
+  const [ isBaseImageLoading, setIsBaseImageLoading ] = useState(false)
 
   //init @ zero, update only if client-side
-  const [ zoomLevel, setZoomLevel ] = useState(0)
+  const [ zoomLevel, setZoomLevel ] = useState(0)   //will multiply section width by 4 to get size in px
   const [ minZoom, setMinZoom ] = useState(0)
   const [ maxZoom, setMaxZoom ] = useState(0)
   useEffect(() => {
-    const zoomMin = window.innerWidth < 640 ? 2 : 5       //mobile:w-2 (8px), sm:w-5 (20px)
-    const zoomMax = window.innerWidth < 640 ? 100 : 250   //?
+    // window.innerWidth = 640: tailwind's breakpoint for mobile screens
+    const zoomMin = window.innerWidth < 640 ? gridConstants[gridSize].screen["mobile"].zoomMin : gridConstants[gridSize].screen["sm"].zoomMin
+    const zoomMax = window.innerWidth < 640 ? gridConstants[gridSize].screen["mobile"].zoomMax : gridConstants[gridSize].screen["sm"].zoomMax
     setZoomLevel(zoomMin)
     setMinZoom(zoomMin)
     setMaxZoom(zoomMax)
-    resetBaseImageList()
-  }, [])
+
+    makeMosaic()
+  }, [gridSize])
 
   // const cards = [
   //   {id: "134", name: "Vaporeon", avgColor: [108,188,211], url: "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSH4/SWSH4_EN_30.png"},
@@ -59,15 +94,12 @@ export default function Home() {
   // ]
   const cards = dataset
 
-  function resetBaseImageList() {
-    setBaseImageList([{id: "tcg-back", name: "-", set: { name: "-", series: "-" }, number: "-", image: tcgBack}])
-    setBaseImageIndex(-1)
-  }
-
   function getBaseImageList(query: string) {
+    setIsBaseImageLoading(true)
     if (query == "TCG-back") {
-      resetBaseImageList()
+      setBaseImageList([{id: "tcg-back", name: "-", set: { name: "-", series: "-" }, number: "-", image: tcgBack}])
       setBaseImageIndex(-1)
+      setIsBaseImageLoading(false)
       return
     }
     axios.get(`https://api.pokemontcg.io/v2/cards?q=name:${query}`).then(response => {
@@ -87,6 +119,7 @@ export default function Home() {
       })
       setBaseImageList(cards)
       setBaseImageIndex(0)
+      setIsBaseImageLoading(false)
     })
   }
 
@@ -97,6 +130,7 @@ export default function Home() {
   }
 
   async function makeMosaic() {
+    setIsGridLoading(true)
     setGrid([]) //reset grid
 
     const baseImageData = await getImage("https://corsproxy.io/" + baseImage)   //Dev
@@ -129,8 +163,10 @@ export default function Home() {
         })
       }
     }
+    setIsGridLoading(false)
   }
 
+  //Updates baseImage preview everytime user changes the dropdown selection or picks a new option from the provided list
   useEffect(() => {
     setBaseImage(baseImageIndex == -1 ? tcgBack : baseImageList[baseImageIndex].image)
   }, [baseImageList, baseImageIndex])
@@ -152,9 +188,10 @@ export default function Home() {
     // }
 
     //Mosaic grid with images from the db - V3
-    (async () => {
-      makeMosaic()
-    })()
+    // (Will trigger this @ another useEffect, on every gridSize change)
+    // (async () => {
+      // makeMosaic()
+    // })()
   }, [])
 
   return (
@@ -181,16 +218,27 @@ export default function Home() {
 
       {/* Slider: */}
       <div className="mt-2 flex flex-row items-center gap-4">
-        <button className="text-2xl font-bold disabled:text-gray-400 cursor-pointer disabled:cursor-default" disabled={!(baseImageIndex > 0 && baseImageIndex < baseImageList.length)} onClick={() => {if (baseImageIndex > 0 && baseImageIndex < baseImageList.length) {setBaseImageIndex(baseImageIndex - 1)}}}>{"<"}</button>
-        <img 
-          src={baseImage}
-          alt={getBaseImageName()}
-          title={getBaseImageName()}
-          className="w-40 aspect-auto"
-        />        
-        <button className="text-2xl font-bold disabled:text-gray-400 cursor-pointer disabled:cursor-default" disabled={!(baseImageIndex >= 0 && baseImageIndex < baseImageList.length -1)} onClick={() => {if (baseImageIndex >= 0 && baseImageIndex < baseImageList.length -1) {setBaseImageIndex(baseImageIndex + 1)}}}>{">"}</button>
+        <button className="text-4xl font-bold disabled:text-gray-400 cursor-pointer disabled:cursor-default" disabled={!(baseImageIndex > 0 && baseImageIndex < baseImageList.length)} onClick={() => {if (baseImageIndex > 0 && baseImageIndex < baseImageList.length) {setBaseImageIndex(baseImageIndex - 1)}}}>{"<"}</button>
+        {
+          isBaseImageLoading
+          ?
+            <div className="min-w-40 min-h-56 flex items-center justify-center">
+              <svg aria-hidden="true" className="w-12 h-12 mx-auto my-auto text-gray-300 dark:text-gray-300 fill-blue-600 animate-spin" viewBox="0 0 100 101" fill="none">
+                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+              </svg>
+            </div>
+          :
+            <img 
+              src={baseImage}
+              alt={getBaseImageName()}
+              title={getBaseImageName()}
+              className="w-40 aspect-auto"
+            /> 
+        }  
+        <button className="text-4xl font-bold disabled:text-gray-400 cursor-pointer disabled:cursor-default" disabled={!(baseImageIndex >= 0 && baseImageIndex < baseImageList.length -1)} onClick={() => {if (baseImageIndex >= 0 && baseImageIndex < baseImageList.length -1) {setBaseImageIndex(baseImageIndex + 1)}}}>{">"}</button>
       </div>
-      <h1 className="mt-1 mb-2 text-xs">{getBaseImageName()}</h1>
+      <h1 className="mt-1 mb-2 text-xs italic">{isBaseImageLoading ? "-" : getBaseImageName()}</h1>
       
       <button 
         onClick={() => makeMosaic()}
@@ -212,7 +260,7 @@ export default function Home() {
 
       {/* Zoom: */}
       <div className="mt-2 flex flex-row items-center gap-4">
-        <h1 className="text-xl">Zoom:</h1>
+        <h1 className="w-12 text-xl">Zoom:</h1>
         <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (zoomLevel > minZoom) {setZoomLevel(zoomLevel - 1)}}}>–</button>
         <input 
           type="range" value={zoomLevel} min={minZoom} max={maxZoom} 
@@ -222,29 +270,91 @@ export default function Home() {
         <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (zoomLevel < maxZoom) {setZoomLevel(zoomLevel + 1)}}}>+</button>
       </div>
 
-      {/* Grid: */}
-      {/* Outer div width: 50 cards of N pixels each (mobile:w-2 (8px), sm:w-5 (20px)) */}
-      {/* Outer div height: 50 cards of 1:1.4 ratio */}
-      <div className="mt-2 overflow-auto w-[calc(50*8px)] h-[calc(50*8*1.4px)] sm:w-[calc(50*20px)] sm:h-[calc(50*20*1.4px)]">
-        <div className={` 
-          grid grid-cols-50 min-w-max
-          zbg-cover zbg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]
-        `}>
-          {
-            grid.map((e, i) => {
-              return (
-                <img 
-                  key={i}
-                  src={e.url}
-                  alt={e.name}
-                  title={e.name}
-                  // className="w-5 aspect-auto opacity-100"
-                  style={{ width: `${zoomLevel * 4}px` }} //bypass Tailwind’s width utilities and instead uses CSS inline style
-                />
-              )
-            })
+      {/* Grid size: */}
+      <div className="mt-2 flex flex-row items-center gap-4">
+        <h1 className="w-12 text-xl">Grid:</h1>
+        <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (gridSize >= 50) {setGridSize(gridSize - 25 as 25 | 50 | 75 | 100)}}}>–</button>
+        <input 
+          type="range" value={gridSize} min={25} max={100} step={25} 
+          onChange={(e) => {setGridSize(+e.target.value as 25 | 50 | 75 | 100)}}
+          className="w-3xs sm:w-md cursor-pointer"
+        />
+        <button className="text-2xl font-bold cursor-pointer" onClick={() => {if (gridSize < 100) {setGridSize(gridSize + 25 as 25 | 50 | 75 | 100)}}}>+</button>
+      </div>
+
+      <style>
+        {`
+          .grid {
+            margin-top: 8px;
+            overflow: auto;
+            /* Desktop: */
+            width: calc(${gridSize} * ${gridConstants[gridSize].screen["sm"].cardWidth}px);
+            height: calc(${gridSize} * ${gridConstants[gridSize].screen["sm"].cardWidth} * 1.4px);
+            /* Mobile: */
+            @media only screen and (max-width: 640px) {
+              width: calc(${gridSize} * ${gridConstants[gridSize].screen["mobile"].cardWidth}px);
+              height: calc(${gridSize} * ${gridConstants[gridSize].screen["mobile"].cardWidth} * 1.4px);
+            }
           }
-        </div>
+        `}
+      </style>
+
+      {/* Grid: */}
+      {/* Outer div width: 50 cards of N pixels each (mobile:w-2 (8px)) */}
+      {/* Outer div height: 50 cards of 1:1.4 ratio */}
+      {/* <div className="mt-2 overflow-auto w-[calc(50*8px)] h-[calc(50*8*1.4px)] sm:w-[calc(50*10px)] sm:h-[calc(50*10*1.4px)]"> */}
+      <div 
+        // V1: Tailwind:
+        // Problem: not responsive
+        // className={
+        //   `mt-2 overflow-auto 
+        //   w-[calc(${gridSize}*${gridConstants[gridSize].screen["mobile"].cardWidth}px)] 
+        //   h-[calc(${gridSize}*${gridConstants[gridSize].screen["mobile"].cardWidth}*1.4px)] 
+        //   sm:w-[calc(${gridSize}*${gridConstants[gridSize].screen["sm"].cardWidth}px)] 
+        //   sm:h-[calc(${gridSize}*${gridConstants[gridSize].screen["sm"].cardWidth}*1.4px)]`
+        // }
+        // V2: Inline CSS equivalent for the tailwind class above:
+        // (could work without the "calc" function (like the grid section style), but both ways strech the grid for a split second before reload because of the async nature of the state)
+        // Problem: no inline media queries for diferent screen sizes
+        // style={{ 
+        //   marginTop: "8px", overflow: "auto",
+        //   width: `calc(${gridSize}*${gridConstants[gridSize].screen["sm"].cardWidth}px)`,
+        //   height: `calc(${gridSize}*${gridConstants[gridSize].screen["sm"].cardWidth}*1.4px)`
+        // }}
+        // V3: <style> tag with { template string } inside JSX:
+        className="grid"
+      >
+        {
+          isGridLoading
+          ?
+            <svg aria-hidden="true" className="w-12 h-12 mx-auto my-auto text-gray-300 dark:text-gray-300 fill-blue-600 animate-spin" viewBox="0 0 100 101" fill="none">
+              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+            </svg>
+          :
+            <div 
+              // className={
+              //   `grid grid-cols-50 min-w-max
+              //   zbg-cover zbg-[url('https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg')]`
+              // }
+              style={{ display: "grid", gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`, minWidth: "max-content" }}  //CSS equivalent for the tailwind class above
+            >
+              {
+                grid.map((e, i) => {
+                  return (
+                    <img 
+                      key={i}
+                      src={e.url}
+                      alt={e.name}
+                      title={e.name}
+                      // className="w-5 aspect-auto opacity-100"
+                      style={{ width: `${zoomLevel * 4}px` }} //CSS equivalent for the tailwind class above
+                    />
+                  )
+                })
+              }
+            </div>
+        }
       </div>
     </div>
   )
