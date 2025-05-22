@@ -122,4 +122,4 @@ Ou, confira online em: https://pokemon-tcg-mosaic.vercel.app
 - ✅ Otimizar para mobile/desktop
 - ✅ Controle de zoom da imagem
 - ✅ Selecionar image base a partir de uma lista
-- ⚪ Controle de resolução da grade do mosaico
+- ✅ Controle de resolução da grade do mosaico (grids 25x25 até 100x100)
