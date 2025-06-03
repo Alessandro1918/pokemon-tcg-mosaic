@@ -1,20 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Pokemon TCG Mosaic",
   description: "https://github.com/Alessandro1918/pokemon-tcg-mosaic",
+  // metadataBase: new URL('https://pokemon-tcg-mosaic.vercel.app'),
+  openGraph: {
+    title: "Pokemon TCG Mosaic",
+    description: "https://github.com/Alessandro1918/pokemon-tcg-mosaic",
+    images: [{
+      url: "/assets/og-image.jpg",  //relative to "/public"
+    }],
+  }
 };
 
 export default function RootLayout({
@@ -25,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased`}
       >
         {children}
       </body>
