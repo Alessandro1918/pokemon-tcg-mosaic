@@ -1,15 +1,36 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { createCanvas, Image, loadImage } from "canvas"
+import axios from "axios"
 import { getImageV2 } from "../../functions/getImage"
 import getAvgColor from "../../functions/getAvgColor"
 import getBestColor from "../../functions/getBestColor"
-import dataset from "../../cards/eevolutions.json"
+import dataset from "../../cards/sv3pt5.json"
 
-export async function GET() {
+export async function GET(request: NextRequest) {
 
   const startTime = Date.now()
 
-  const url = "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg"
+  //Default target img
+  var url = "https://i.ebayimg.com/images/g/evMAAOSwlRZflJ-g/s-l400.jpg"
+
+  //Get query params from URL, check API for a single result
+  //Ex 1: set name with NO spaces
+  //http://localhost:3000/api/og?name=Charizard&set=Evolutions&number=12
+  //https://api.pokemontcg.io/v2/cards?q=name:Charizard set.name:Evolutions number:12 //API docs says to put spaces between filters
+  //https://api.pokemontcg.io/v2/cards?q=name:Charizard%20set.name:Evolutions%20number:12 //Encode spaces with %20
+  //Ex 2: set name WITH spaces
+  //http://localhost:3000/api/og?name=Pikachu&set=POP%20Series%205&number=13
+  //https://api.pokemontcg.io/v2/cards?q=name:Pikachu set.name:"POP Series 5" number:13 //Spaces inside filter: use quote-unquote
+  //https://api.pokemontcg.io/v2/cards?q=name:Pikachu%20set.name:%22POP%20Series%205%22%20number:13 //Encode the quote mark with %22
+  const nameParam = request.nextUrl.searchParams.get("name")
+  const setParam = request.nextUrl.searchParams.get("set")
+  const numberParam = request.nextUrl.searchParams.get("number")
+  if (nameParam && setParam && numberParam) {
+    const response = await axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nameParam}"%20set.name:"${setParam}"%20number:${numberParam}`)
+    if (response.data.count == 1) {
+      url = response.data.data[0].images.small
+    }
+  }
 
   const baseImg = await getImageV2(url, 1.5)
 
