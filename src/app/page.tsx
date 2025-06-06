@@ -5,7 +5,7 @@ import { CardProps } from "./types/card"
 import { ApiCardProps } from "./types/api"
 import { gridConstants } from "./constants/grid"
 import { Loading } from "./components/loading"
-import getImage from "./functions/getImage"
+import { getImage } from "./functions/getImage"
 import getAvgColor from "./functions/getAvgColor"
 import getBestColor from "./functions/getBestColor"
 import dataset from "./cards/sv3pt5.json"
@@ -88,8 +88,8 @@ export default function Home() {
     setIsGridLoading(true)
     setGrid([]) //reset grid
 
-    const baseImageData = await getImage("https://corsproxy.io/" + baseImage)   //Dev
-    // const baseImageData = await getImage(baseImage)    //Prod
+    // const baseImageData = await getImage("https://corsproxy.io/" + baseImage)   //Dev
+    const baseImageData = await getImage(baseImage)    //Prod
 
     //Split the base image in small image sections
     const sectionWidth = baseImageData.shape[0]/gridSize

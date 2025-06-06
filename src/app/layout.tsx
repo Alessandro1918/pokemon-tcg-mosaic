@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     title: "Pokemon TCG Mosaic",
     description: "https://github.com/Alessandro1918/pokemon-tcg-mosaic",
     images: [{
-      url: "/assets/og-image.jpg",  //relative to "/public"
+      // url: "/assets/og-image.jpg",  //relative to "/public"
+      url: "/api/og"
     }],
   }
 };
