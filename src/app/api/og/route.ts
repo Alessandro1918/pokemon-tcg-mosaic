@@ -25,6 +25,8 @@ export async function GET(request: NextRequest) {
   const nameParam = request.nextUrl.searchParams.get("name")
   const setParam = request.nextUrl.searchParams.get("set")
   const numberParam = request.nextUrl.searchParams.get("number")
+  const gridParam = request.nextUrl.searchParams.get("grid")
+
   if (nameParam && setParam && numberParam) {
     const response = await axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nameParam}"%20set.name:"${setParam}"%20number:${numberParam}`)
     if (response.data.count == 1) {
@@ -34,7 +36,7 @@ export async function GET(request: NextRequest) {
 
   const baseImg = await getImageV2(url, 1.5)
 
-  const gridSize = 15               //Number of cards in the entire grid = size ˆ 2
+  const gridSize = typeof gridParam == "string" ? Number(gridParam) : 25  //Number of cards in the entire grid = size ˆ 2
   const gridWidth = baseImg.width   //px
   const gridHeight = baseImg.height //px
   const sectionWidth = Math.floor(gridWidth / gridSize)
@@ -83,7 +85,8 @@ export async function GET(request: NextRequest) {
       //V2: Parallel
       const loadTask = (async () => {
         const startTime = Date.now()
-        const img = await loadImage(bestMatch.url)
+        // const img = await loadImage(bestMatch.url)                               //V2.1 - Load from URL
+        const img = await loadImage(`./public/assets/sv3pt5/${bestMatch.id}.png`)   //V2.2 - Load from local
         const endTime = Date.now()
         return { 
           img, i, j, avgColor, bestMatch, loadTime: endTime - startTime,
