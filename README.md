@@ -41,12 +41,24 @@ Confira online em: https://pokemon-tcg-mosaic.vercel.app
 
 ### ▶️ Rodando o App:
 
+#### 🖼️ Frontend
+
+```bash
+  cd pokemon-tcg-mosaic  #change to this directory
+  npm install            #download dependencies to node_modules
+  npm run dev            #start the project
+```
+
+Acesar pelo navegador: http://localhost:3000
+
+Ou, confira online em: https://pokemon-tcg-mosaic.vercel.app
+
 #### 📊 Dataset
 
 Gerando uma lista de cores a partir de uma lista de imagens:
 ```bash
-  cd src/app                                   #change to this directory
-  node getAvgColorList.js sets/starters.json   #runs this .js script with this .json file as input 
+  cd src/app/functions                            #change to this directory
+  node getAvgColorList.js ../sets/starters.json   #runs this .js script with this .json file as input 
 ```
 
 Input:
@@ -105,17 +117,6 @@ Bulbasaur avgColor: [185,211,100] = ![Badge](https://img.shields.io/badge/_____-
 Charmander avgColor: [223,163,115] = ![Badge](https://img.shields.io/badge/_____-%23dfa373)</br>
 Squirtle avgColor: [136,187,214] = ![Badge](https://img.shields.io/badge/_____-%2388bbd6)</br>
 
-#### 🖼️ Frontend
-
-```bash
-  cd pokemon-tcg-mosaic  #change to this directory
-  npm install            #download dependencies to node_modules
-  npm run dev            #start the project
-```
-
-Acesar pelo navegador: http://localhost:3000
-
-Ou, confira online em: https://pokemon-tcg-mosaic.vercel.app
 
 ### 📋 TODO:
 
