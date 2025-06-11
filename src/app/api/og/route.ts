@@ -85,8 +85,7 @@ export async function GET(request: NextRequest) {
       //V2: Parallel
       const loadTask = (async () => {
         const startTime = Date.now()
-        // const img = await loadImage(bestMatch.url)                               //V2.1 - Load from URL
-        const img = await loadImage(`./public/assets/sv3pt5/${bestMatch.id}.png`)   //V2.2 - Load from local
+        const img = await loadImage(bestMatch.url)
         const endTime = Date.now()
         return { 
           img, i, j, avgColor, bestMatch, loadTime: endTime - startTime,
