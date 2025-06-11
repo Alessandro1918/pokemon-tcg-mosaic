@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 
   const baseImg = await getImageV2(url, 1.5)
 
-  const gridSize = typeof gridParam == "string" ? Number(gridParam) : 25  //Number of cards in the entire grid = size ˆ 2
+  const gridSize = 15               //Number of cards in the entire grid = size ˆ 2
   const gridWidth = baseImg.width   //px
   const gridHeight = baseImg.height //px
   const sectionWidth = Math.floor(gridWidth / gridSize)
