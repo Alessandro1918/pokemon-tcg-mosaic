@@ -32,7 +32,8 @@ Confira online em: https://pokemon-tcg-mosaic.vercel.app
 </div>
 
 ## 🧊 Cool features
-- Geração de images client-side (pelo usuário, no [site web](https://pokemon-tcg-mosaic.vercel.app)) e server-side (dinâmicas, pela [API](https://pokemon-tcg-mosaic.vercel.app/api/og?name=Pikachu&set=POP%20Series%205&number=13)).
+- Escolha da imagem base usando a [Pokemon TCG API](https://pokemontcg.io/).
+- Geração de images client-side (pelo usuário, no [site web](https://pokemon-tcg-mosaic.vercel.app)) e server-side (dinâmicas, por [API](https://pokemon-tcg-mosaic.vercel.app/api/og?name=Pikachu&set=POP%20Series%205&number=13) própria).
 - Meta tags dinâmicas, para compartilhamento nas redes sociais.
 
 <div align="center">
@@ -141,3 +142,6 @@ Squirtle avgColor: [136,187,214] = ![Badge](https://img.shields.io/badge/_____-%
 - ✅ Controle de resolução da grade do mosaico (grids 25x25 até 100x100)
 
 - ✅ Geração de meta tags dinâmicas
+
+## ⭐ Like, Subscribe, Follow
+Curtiu o projeto? Marque esse repositório com uma Estrela ⭐!
