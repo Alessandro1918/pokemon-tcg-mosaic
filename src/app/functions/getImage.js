@@ -13,11 +13,12 @@ const getPixels = require("get-pixels")
 // export function getImage(url: string): Promise<any> {  //TS
 function getImage(url) {                                  //JS
   return new Promise((resolve, reject) => {
-    getPixels(url, function(err, pixels) {
+    // getPixels(url, function(err, pixels) {                                //Without CORS proxy
+    getPixels("https://corsproxy.io/" + url, function(err, pixels) {   //With CORS proxy
       if (err) {
-        console.log(err)
-        console.log("Bad image path")
-        reject(err)
+        // console.log(err)
+        console.log("Error getting pixel data")
+        reject(new Error("Error getting pixel data"))
       } else {
         // console.log("Got pixels:", pixels.shape.slice(), pixels.data)
         resolve({shape: pixels.shape.slice(), pixels: pixels.data})
