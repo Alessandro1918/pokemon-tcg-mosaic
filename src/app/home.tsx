@@ -88,36 +88,45 @@ export default function Home() {
     setIsGridLoading(true)
     setGrid([]) //reset grid
 
-    // const baseImageData = await getImage("https://corsproxy.io/" + baseImage)   //Dev
-    const baseImageData = await getImage(baseImage)    //Prod
+    try {
+      const baseImageData = await getImage(baseImage)
 
-    //Split the base image in small image sections
-    const sectionWidth = baseImageData.shape[0]/gridSize
-    const sectionHeight = baseImageData.shape[1]/gridSize
+      //Split the base image in small image sections
+      const sectionWidth = baseImageData.shape[0]/gridSize
+      const sectionHeight = baseImageData.shape[1]/gridSize
 
-    for (let j = 0; j < gridSize; j++) {
-      for (let i = 0; i < gridSize; i++) {
-        const avgColor = getAvgColor(
-          baseImageData.pixels, 
-          baseImageData.shape[0], 
-          Math.trunc(i*sectionWidth), 
-          Math.trunc(j*sectionHeight), 
-          Math.trunc(sectionWidth), 
-          Math.trunc(sectionHeight)
-        )
-        const bestMatch = getBestColor(avgColor, cards)
-        // console.log(
-        //   `Section ${(i+1)+(j*gridSize)}:`,
-        //   `x=${Math.trunc(i*sectionWidth)}`,
-        //   `y=${Math.trunc(j*sectionHeight)}`,
-        //   `avgColor: ${avgColor}`,
-        //   `bestMatch: ${bestMatch.avgColor} (${bestMatch.name})`
-        // )
-        setGrid(prevGrid => {
-          return [...prevGrid, bestMatch]
-        })
+      for (let j = 0; j < gridSize; j++) {
+        for (let i = 0; i < gridSize; i++) {
+          const avgColor = getAvgColor(
+            baseImageData.pixels, 
+            baseImageData.shape[0], 
+            Math.trunc(i*sectionWidth), 
+            Math.trunc(j*sectionHeight), 
+            Math.trunc(sectionWidth), 
+            Math.trunc(sectionHeight)
+          )
+          const bestMatch = getBestColor(avgColor, cards)
+          // console.log(
+          //   `Section ${(i+1)+(j*gridSize)}:`,
+          //   `x=${Math.trunc(i*sectionWidth)}`,
+          //   `y=${Math.trunc(j*sectionHeight)}`,
+          //   `avgColor: ${avgColor}`,
+          //   `bestMatch: ${bestMatch.avgColor} (${bestMatch.name})`
+          // )
+          setGrid(prevGrid => {
+            return [...prevGrid, bestMatch]
+          })
+        }
       }
     }
+    catch (err: any) {
+      if (err.message) {
+        alert(err.message)
+      } else {
+        alert("Unknow server error")
+      }
+    }
+
     setIsGridLoading(false)
   }
 

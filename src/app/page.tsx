@@ -10,14 +10,13 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const { name, set, number } = await searchParams
   return {
     title: "Pokemon TCG Mosaic",
-    description: "https://github.com/Alessandro1918/pokemon-tcg-mosaic",
+    description: "Mosaic your favorite Pokemon cards!",
     // metadataBase: new URL('https://pokemon-tcg-mosaic.vercel.app'),
     openGraph: {
       title: "Pokemon TCG Mosaic",
-      description: "https://github.com/Alessandro1918/pokemon-tcg-mosaic",
+      description: "Mosaic your favorite Pokemon cards!",
       images: [{
-        // url: "/assets/og-image.jpg",  //relative to "/public"
-        // url: "/api/og",
+        // url: "/assets/og-image.jpg",
         url: `/api/og?name=${name}&set=${set}&number=${number}`
       }],
     }

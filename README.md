@@ -48,6 +48,8 @@ Confira online em: https://pokemon-tcg-mosaic.vercel.app
 
 ## 🗂️ Utilização
 
+Confira online em: https://pokemon-tcg-mosaic.vercel.app
+
 ### 🐑🐑 Clonando o repositório:
 
 ```bash
@@ -65,8 +67,6 @@ Confira online em: https://pokemon-tcg-mosaic.vercel.app
 ```
 
 Acesar pelo navegador: http://localhost:3000
-
-Ou, confira online em: https://pokemon-tcg-mosaic.vercel.app
 
 #### 📊 Dataset
 
