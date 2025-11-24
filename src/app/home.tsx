@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from "react"
-import axios from "axios"
 import { CardProps } from "./types/card"
 import { ApiCardProps } from "./types/api"
 import { gridConstants } from "./constants/grid"
@@ -49,7 +48,7 @@ export default function Home() {
   // ]
   const cards = dataset
 
-  function getBaseImageList(query: string) {
+  async function getBaseImageList(query: string) {
     setIsBaseImageLoading(true)
     if (query == "TCG-back") {
       setBaseImageList([{id: "tcg-back", name: "-", set: { name: "-", series: "-" }, number: "-", image: tcgBack}])
@@ -57,10 +56,17 @@ export default function Home() {
       setIsBaseImageLoading(false)
       return
     }
-    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:${query}`).then(response => {
+    const cards:ApiCardProps[] = []
+    try {
+      // const corsProxy = "https://corsproxy.io/"
+      const response = await fetch(`https://api.pokemontcg.io/v2/cards?q=name:${query}`)
+      const result = await response.json()
       // console.log(response.data)
-      const cards:ApiCardProps[] = []
-      response.data.data.map((e: any) => {
+      if (result.error) {
+        console.log(result.error)
+        throw new Error(String(result.error.status))
+      }
+      result.data.map((e: any) => {
         cards.push({
           id: e.id,
           name: e.name,
@@ -72,10 +78,16 @@ export default function Home() {
           image: e.images.small
         })
       })
-      setBaseImageList(cards)
       setBaseImageIndex(0)
-      setIsBaseImageLoading(false)
-    })
+    } catch (err: any) {
+      console.log(err.message)
+      switch (err.message) {
+        case "504": alert("Error - Request timeout"); break
+        default: alert("An unknow error happened :(")
+      }
+    }
+    setBaseImageList(cards)
+    setIsBaseImageLoading(false)
   }
 
   function getBaseImageName() {
@@ -135,7 +147,7 @@ export default function Home() {
     setBaseImage(baseImageIndex == -1 ? tcgBack : baseImageList[baseImageIndex].image)
   }, [baseImageList, baseImageIndex])
 
-  useEffect(() => {
+  // useEffect(() => {
     //Init grid - V1
     // setGrid([cards[1], cards[2], cards[3], cards[4], cards[5], cards[1], cards[2], cards[3], cards[4]]) // 9 items total, grid with 3 collumns, rows = 3 
 
@@ -156,7 +168,7 @@ export default function Home() {
     // (async () => {
       // makeMosaic()
     // })()
-  }, [])
+  // }, [])
 
   return (
     <div className="flex flex-col items-center justify-center">
